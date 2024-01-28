@@ -1,0 +1,3 @@
+https://www.acwing.com/blog/content/80/
+logN时间内 单点更新 query
+ Fenwick 树对于“前缀和查询”和“单点更新”都非常频繁的业务来说是高效的。

@@ -1,0 +1,25 @@
+线段树是一棵平衡二叉树，树上的每个节点维护一个区间。根节点维护的是整个区间，每个节点维护的是父亲节点的区间二等分之后的其中一个子区间。
+当有 n 个元素时，对区间的操作（单点更新、区间更新、区间查询等）可以在 logn  的时间复杂度内完成
+
+根据上述描述，我们可以总结一下线段树的特点：
+
+线段树的每个节点都代表一个区间。
+线段树具有唯一的根节点，代表的区间是整个统计范围，比如 [1, n]。
+线段树的每个叶子节点都代表一个长度为 1 的单位区间 [x, x]。
+对于每个内部节点 [left, right]，它的左子节点是 [left, mid]，右子节点是 [mid + 1, right]。其中 mid = (left + right) / 2（向下取整）。
+
+
+
+很多题是前缀和和 差分数组可以做. 但是segement tree是解决一切的钥匙
+
+729 731 732
+calendar 三件套
+https://github.com/itcharge/LeetCode-Py/blob/main/Solutions/0729.%20%E6%88%91%E7%9A%84%E6%97%A5%E7%A8%8B%E5%AE%89%E6%8E%92%E8%A1%A8%20I.md
+
+bit 更简单 能解决 segement tree大部分问题
+
+对于不变的数组
+前缀和 差分数组就可以了
+
+但是一旦数组可以更新 就不行了
+https://www.youtube.com/watch?v=WbafSgetDDk&t=457s&ab_channel=HuaHua

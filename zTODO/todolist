@@ -1,0 +1,59 @@
+1 前缀和
+https://labuladong.github.io/algo/di-yi-zhan-da78c/shou-ba-sh-48c1d/xiao-er-me-03265/
+2 差分数组
+---
+1,2 似乎线段树全部可以解决 Done
+3 rabin karp算法
+4 蓄水池算法
+https://labuladong.gitee.io/algo/di-yi-zhan-da78c/shou-ba-sh-48c1d/chang-shu--6b296/
+5 fenway tree / BIT
+https://halfrost.com/binary_indexed_tree/
+https://www.acwing.com/blog/content/80/
+很多题很多题
+
+
+----------------
+Question to do
+399
+1631
+bfs should better than union find
+803 too difficult 打砖块
+
+480 很难 面经没有应该不用做 45分钟不能做
+
+meetingroom 还差第三题（等面经）
+
+
+-------------------
+second time
+二分法 4题的二分做法 还是有点不清楚，感觉答案不完美。。
+二分法 410 719 k问题 表面是pq可以做的， 但实际上都是二分法 ， 利用可以达到的子数组的数量来不断逼近，二分法的判断条件（子数组的数量）
+好题 658 二分法 找到最接近的k个数
+快慢指针  430 好题 非常清晰 再来一次
+slidingwindows 727 , 题目问题,遇到面经要再做一次 双指针
+preSum 值得一个系列
+467 dp
+quick sort 还是要多做几次 215 要倒背如流
+1122  很好的题
+164 561 计数排序 基数排序, 如果没有面经 就不做. 但是可以了解. o(n)情况下 给数组排序的方法.
+哈希表 560 非常好的一道题
+贪心 1296
+Tire 425 336 都是很好的题 回文 + word squre 一个是pre/sufix 一个是backtrack
+
+Tree 124 经典中的经典 dfs
+tree flat 这道题很好,很难..感觉没有面经不会有人做. 类似morris
+
+
+面经没有不做题
+leetcode 85
+leetcode 360
+leetcode 995  这道题面经没有真的没法做 太难了
+https://github.com/itcharge/LeetCode-Py/blob/main/Solutions/0995.%20K%20%E8%BF%9E%E7%BB%AD%E4%BD%8D%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BF%BB%E8%BD%AC%E6%AC%A1%E6%95%B0.md
+480 很难 面经没有应该不用做 45分钟不能做, 但可以准备答案
+链表排序
+148/147 面经没有 不碰
+哈希表 149 面经没有就没必要做. 纯纯的公式题 ax + b = y
+421/440 trie 面经没有 不要做 很难理解
+
+
+

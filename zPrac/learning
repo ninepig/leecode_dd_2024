@@ -1,0 +1,399 @@
+1 PYTHON
+ 1.2  for i in range(size - 1 , -1 , -1 ):
+   python 里面的从后往前loop的写法
+
+ 1.3 for idx,value in enumerate(arr):
+            idx_map[value] = idx
+      把数组value:index 放入map的写法
+
+ 1.4 merge = nums1 + nums2 数组相加 就是【1，2，3】 + 【4，5，6】 ==》 【1，2，3，4，5，6】
+ 1.4.1 +号 可以直接把数组相加 所以-->dict之中的value 如果是一个 list[list] type ---> 可以之恶极用 dict[key] += [target] 这种形式来做
+ 见 49题
+
+ 1.5 lambda的用法 arr.sort(key= lambda v : (v operation))
+    sort的 关键词是key  key的值是一个lambda
+
+ 1.6 python 字符串操作 可以先变成list 再用''.join(list)
+ 1.7 python 字符串操作 s.isxxx 各种判断,是针对字符串本身. 还有特殊的lib isALPHNUM() 是否是数字以及字母 参见leetcode345
+ 1.8 python array reverse ---》 num = num[::-1]
+ 1.9 python 内置的字符统计辩解dict 接口 Collection.counter(str) 非常好用
+     同时 del dict[key] 可以删除这个key
+
+     collection.defaultDict 这个容器 可以给dict key默认设为0 ， 就不需要初始化了
+     如果只是dict() 则需要给key 初始化值
+
+
+     orignalCounter = collections.defaultdict(int)
+    # python的写法问题
+    for char in orignal:
+        orignalCounter[char] += 1
+
+
+        orignalCounter = dict()
+    # python的写法问题
+    for char in orignal:
+        if char not in orignalCounter:
+            orignalCounter[char] = 1
+        else:
+            orignalCounter[char] += 1
+
+ 1.10 python 数组intial 的方法   start_time= [x[0] for x in intervals]
+                                end_time = [x[1] for x in intervals]
+
+ 1.11 python sortedcontainers import SortedList
+      sortedlist container--> 用来做排序好的windows，便于取值 一般和 bisect(windows,value)找位置配合，找最接近的两个数
+      这个添加只能用add 删除用remove 函数
+  1.12 python print ("", x,x) 用逗号表示concatenate后面的变量,包括字符串,数值
+  1.13 heap的操作 --> python lib 是heapq --> 需要一个数组进行 heapify (可以直接heappush, 不一定需要heapfiy)  然后所有的操作都需要以这个数组作为参数传入
+       最小堆就默认加入即可 最大堆就是反向加入. heap 默认以第一个元素作为排序的数值 比如(x,y) 会以 x的数值进行排序 最小堆, (-x,y)就是最大堆
+
+       heap 不能直接加入 listNode , 也是需要 加入(val,index) 这样的tuple 才能生效
+
+  1.14 python 统计hashmap count 可以用length, 也可以用计数器, 参见159/340 注解 对于defaultdict vs dict
+  1.15 python cmp_to_key(internal method) 自定义sort rule 参见 179
+  1.16 python class , 自身属性 要用self.aaaa = xxx 来初始化 比如有一个数组 叫niuniu self.niuniu = []
+  1.17 python stack if we use [] (list)  list.pop() 会把最后一个数pop出来 返回值是item 效果等同 list.pop(-1) list[-1] 相当于peek
+  1.17 python hashmap---> getOrdefault (对应的方法) ---> map.get(key,defaultValue)
+  1.17 python 数组sort ---> array.sort(key = lamba ---->) 这样写比较好
+  1.18 python 小方法             n, digit = divmod(n, 10) 快速获得n 以及 余数
+  1.19 arr.sort vs sorted()
+  A simple ascending sort is very easy: just call the sorted() function. It returns a new sorted list:
+  You can also use the list.sort() method. It modifies the list in-place (and returns None to avoid confusion). Usually it’s less convenient than sorted() - but if you don’t need the original list, it’s slightly more efficient.
+  1.20 sorted_counter = sorted(counter_s.items(),key= lambda item:item[1],reverse=True) , dict sorted by value
+  1.21 python --> index of list ---> list.index(item)
+  1.22 python 替换char
+                for j in range(26):
+                replace_char = chr(ord('a') + j)#关键词
+  1.23 int <---> list【int]          nums = [int(x) for x in str(target)]  res = sum(d * 10 ** i for i, d in enumerate(nums[::-1]))
+  1.24 int judge    return res if res < 2 ** 31 else -1 #越界 很重要
+
+3 二分查找细节
+3.1区间得开闭问题
+[left, right] [left,right)
+一般只考虑 left = 0 right = size -1 这种 也就是左闭 右闭
+
+3.2 mid取值问题
+
+mid = (left + right )//2
+mid = (left + right + 1)//2
+两种  元素偶数时候, 第一种取到 中间靠左侧, 第二种则是中间靠右侧
+元素奇数得时候, 取到同一个值
+统一： mid = left + (right - left ) // 2
+
+3.3 出界条件
+
+left < right
+left <= right
+
+如果判断语句为 left <= right，并且查找的元素不在有序数组中，则 while 语句的出界条件是 left > right，也就是 left == right + 1，写成区间形式就是
+，此时待查找区间为空，待查找区间中没有元素存在，此时终止循环时，可以直接返回 -1
+
+如果是left < right并且查找的元素不在有序数组中，则 while 语句出界条件是 left == right，写成区间形式就是 [right, right]
+。此时区间不为空，待查找区间还有一个元素存在，我们并不能确定查找的元素不在这个区间中，此时终止循环时，如果直接返回
+ 就是错误的。
+   while left < right:
+        # ...
+    return left if nums[left] == target else -1
+
+3.4 搜索区间
+在进行区间范围选择的时候，通常有三种写法：
+left = mid + 1，right = mid - 1。
+left = mid + 1 ，right = mid。
+left = mid，right = mid - 1
+思路 1：「直接法」—— 在循环体中找到元素后直接返回结果。
+    这种思路是在一旦循环体中找到元素就直接返回。
+    循环可以继续的条件是 left <= right。
+    如果一旦退出循环，则说明这个区间内一定不存在目标元素。
+思路 2：「排除法」—— 在循环体中排除目标元素一定不存在区间。
+设定左右边界为数组两端，即
+，$right = len(nums) - 1$，代表待查找区间为 [left, right]（左闭右闭区间）。
+取两个节点中心位置 mid，比较目标元素和中间元素 的大小，先将目标元素一定不存在的区间排除。
+然后在剩余区间继续查找元素，继续根据条件排除目标元素一定不存在的区间。
+直到区间中只剩下最后一个元素，然后再判断这个元素是否是目标元素。
+
+
+直接法：因为判断语句是 left <= right，有时候要考虑返回是
+ 还是 left right。循环体内有 3 个分支，并且一定有一个分支用于退出循环或者直接返回。
+ 这种思路适合解决简单题目。即要查找的元素性质简单，数组中都是非重复元素，且 ==、>、< 的情况非常好写的时候。
+排除法：更加符合二分查找算法的减治思想。每次排除目标元素一定不存在的区间，
+达到减少问题规模的效果。然后在可能存在的区间内继续查找目标元素。这种思路适合解决复杂题目。比如查找一个数组里可能不存在的元素，找边界问题，可以使用这种思路。
+https://github.com/itcharge/LeetCode-Py/blob/main/Contents/01.Array/03.Array-Binary-Search/02.Array-Binary-Search-02.md
+排除法 取决于等号在哪 , 就两种可能性, 如果num[mid] 小于目标值 , 那mid 不用考虑 所以 left = mid + 1
+ # nums[mid] 小于目标值，排除掉不可能区间 [left, mid]，在 [mid + 1, right] 中继续搜索 ,所以right 可以等于mid , left 等于 mid +1
+
+
+            if nums[mid] < target:
+                left = mid + 1
+            # nums[mid] 大于等于目标值，目标元素可能在 [left, mid] 中，在 [left, mid] 中继续搜索
+            else:
+                right = mid
+  # nums[mid] 大于目标值，排除掉不可能区间 [mid, right]，在 [left, mid - 1] 中继续搜索
+            if nums[mid] > target:
+                right = mid - 1
+            # nums[mid] 小于等于目标值，目标元素可能在 [mid, right] 中，在 [mid, right] 中继续搜索
+            else:
+                left = mid
+
+ 考虑到这个区间再做, 比如1011之中
+            if self.countDays(mid,weights) <= days:
+                right = mid # less than days, so we can reduce the max dayily shipment
+            else:
+                left = mid + 1 # we can not made that, so need increasing
+           因为 mid <= days 所以我们可以减小值, 但是我们不能排除掉 mid , 所以 right = mid
+
+3.5 排除法 看第34题 , 可以focus 左侧 或者右侧
+
+3.6 153 154 33 81  744 1095也是范围缩小的题
+         if nums[mid] > target:
+                right = mid - 1
+        在right 逼近,就是更关注右侧. 用左侧逼近 left = mid + 1 就是更关注左侧
+
+二分法总结
+如果是确定要找一个数 直接法 也就是 <= 比较好
+如果是范围逼近 left<right 这样可以检查 left == right 的情况, 但是要多一个判断 在结束循环之后 因为left == right
+
+然后如果要在倾向于左侧出现的数, 递增的情况下 , 大部分出现第一个数 这样的问题 都是关注左侧
+left = mid + 1
+右侧 right = mid -1
+
+
+经验:
+如果出现数组 排序好的 找位置 ---> 10有89 是二分法. 当然也可以自己施加排序
+
+
+4.0 双指针
+对撞指针：两个指针方向相反。适合解决查找有序数组中满足某些约束条件的一组元素问题、字符串反转问题。
+快慢指针：两个指针方向相同。适合解决数组中的移动、删除元素问题，或者链表中的判断是否有环、长度问题。
+分离双指针：两个指针分别属于不同的数组 / 链表。适合解决有序数组合并，求交集、并集问题。
+
+各种sum 都是对撞指针问题. 如果是有序/或者排序
+sum 系列对撞指针的总结:
+
+针对 当前 i 而言 left , right 是根据i 这个固定的量, 来左右 approaching
+for i in range(size)
+    left = i + 1 # i 右侧的值
+    right = size -1 # 最右侧的值
+如果需要4个变量 就额外引入 j
+关键就是i,j 是否满足合理情况
+比如 i 从0--100
+j就只能是 1--100
+left right 就只能是 2--100
+每个数一一对应
+然后我们需要考虑是否要去重 , 根据题意来
+
+快慢指针，其实这个就是个变种滑动窗口
+三指针形式--》 26 80 430
+        size = len(nums)
+        write_index = 0
+        slow_index = 0
+        while slow_index < size:
+            fast = slow_index
+            while fast < size and nums[fast] == nums[slow_index]:
+                fast += 1
+            nums[write_index] = nums[slow_index]
+            write_index += 1
+            ## handle extra logic
+            if fast - slow_index > 1 ## duplcated
+            slow_index = fast、
+        return write_index
+
+5.0 滑动数组
+
+固定长度模板
+left = 0
+right = 0
+
+while right < len(nums):
+    window.append(nums[right])
+
+    # 超过窗口大小时，缩小窗口，维护窗口中始终为 window_size 的长度
+    if right - left + 1 >= window_size:
+        # ... 维护答案
+        window.popleft()
+        left += 1
+
+    # 向右侧增大窗口
+    right += 1
+
+# 非固定
+left = 0
+right = 0
+
+while right < len(nums):
+    window.append(nums[right])
+
+    while 窗口需要缩小:
+        # ... 可维护答案
+        window.popleft()
+        left += 1
+
+    # 向右侧增大窗口
+    right += 1
+
+5.1 滑动数组 切忌 right - left + 1 >= k 用大于等于
+5.2 滑动数组 这里所谓的windows 可以不同形式的  比如 windows_sum , windows_count 对应的是windows之中对应题目答案的统计
+5.3 滑动数组 要根据windows的题意要求 来决定判断位置
+比如要求windows_sum 大于k 那就要while循环内判断结果
+如果windows_sum 小于k 那就要等while循环结束后判断
+
+
+
+6.0 经验 子数组求和 看到这个字眼 就要想起前缀和  因为 pre[k] - pre[k-2] = sum(array[k-2:k]) ,除非是连续正数,可以用双指针
+   862 vs 209 太经典了
+
+6.1 如果循环数组-->   for i in range(size * 2): 循环两次,只要index 变成 index % size 就可以了
+                     nums[i % size]
+
+
+7.0 linkedlist
+    链表题 必须全部画图 (必须必须必须)
+    当头节点可以被删除的时候 也就是第一个节点可能会被改变的时候 我们需要一个dummyNode , cur 指向dummyNode 这样就可以在head进行逻辑判断了
+
+    dummyNode.next 初始化不一定要指向 head 可以就是个普通哨兵点, 但是赋值的时候他的next一定要指向新的head. 参见21 23
+
+
+8.0 单调栈
+单调递增---> 栈顶到栈底 递增, 只有比栈顶元素小的 可以直接入栈, 要不然要先出栈 再加入. 比如 2 ,3 , 4, 5 --> 0 可以直接入栈 , 栈顶最小
+单调递减--> 栈顶到栈底 递减, 只有比栈顶元素大的,可以直接入栈 , 要不然要先出栈顶部, 再加入. 5 4 3 2 1 --> 6可以直接入栈, 栈顶最大
+
+左侧第一个比当前大的. 从左侧到右侧---> 单调递增栈---> 当前元素入栈时候的栈顶元素
+左侧第一个比当前小的, 从左侧到右侧--->单调递减栈--->当前元素入栈时候的栈顶元素
+
+右侧第一个比当前大的,从左侧到右侧--->单调递增栈---> 右侧第一个将栈顶(当前元素)出栈的元素. 比如  4 6 7 8 这时候栈顶是4, 来了一个5 需要把4 pop , 5就是4 右侧第一个比他大的元素
+
+右侧第一个比当前小的元素,从左侧到右侧--->单调递减栈--->右侧第一个将栈顶(当前元素) 出栈的元素, 比如 8 6 5 4 此时是7 , 来了一个7 需要把8 pop, 7就是8 右侧第一个比他小的元素
+
+def monotoneIncreasingStack(nums):
+    stack = []
+    for num in nums:
+        while stack and num >= stack[-1]:
+            stack.pop()
+        stack.append(num)
+
+def monotoneDecreasingStack(nums):
+    stack = []
+    for num in nums:
+        while stack and num <= stack[-1]:
+            stack.pop()
+        stack.append(num)
+
+8.1 单调栈, 实际单调栈题目之中, 单调栈里存index , 实际比较的时候 是用array[index]来比较. 这样就节省了编码
+    同时, 初始化的时候需要初始化一个数组,这样指定结果要放入指定index 之中
+    ans =[0 for _ in range length]
+    ans[index] = xxxx # 结果数组逻辑
+
+9.0 heap的思路很简单.其实就是维护一个k 的数组, heap会处理好所有的push pop. 我们因为要取第k大,所以就是栈顶元素. 一直保持着栈是k的size即可.
+如果插入元素, 让栈超过k 把顶部pop即可 因为顶部已经是k+1 大了. 这是最小栈
+
+最大栈在python之中就是 把push的val 变成负数. 这样最小变最大
+
+对于heap --> 如果我们要求最大的k个元素,频率最高的k个元素, 肯定是最小堆, 因为pop出去的是k+1大的值, 堆维护的是前k大的值
+同理 如果我们要求最小的k个元素, 频率最低的k个元素,那就是最大的堆,因为pop出去的是第k+1小的值 维护的前k小个值
+
+
+10.0 hash表
+    都是用链表法模拟
+    也就是 [[] for _ in range(bucketsize)]
+    如果是hashset, 我们在hash bucket 之中加入 单独的key元素 也就是 table[hash_key].append(key)
+    如果是hashtable 我们在hash bucket 之中加入 key + value元素 也就是tabke[hash_key].append([key,value]) 也就是最后链表中的元素 是一个二维的小数组,
+
+    [[[key,value],[key,value]]] 最终结果是一个嵌套的数组. 第一维度是 table[hash_key] 这里面元素是一个链表, 链表的key是hashvalue, 链表的元素--> 第二维度就是加入相同hashvalue [key, value]的组合
+
+    collision problem
+    调整哈希函数
+　　选择或设计一个更好的哈希函数，使得哈希值的分布更加均匀，减少碰撞的概率。好的哈希函数应该尽量将输入数据的细微变化映射到不同的哈希值上。
+
+　　2.链地址法(Chaining)
+　　在哈希表的每个位置上维护一个链表或其他数据结构，当发生碰撞时，将冲突的元素存储在该位置上的链表中。这样，即使发生碰撞，仍然可以通过链表进行高效的查找。
+
+　　3.开放地址法(Open Addressing)
+　　当发生碰撞时，通过一定的探测方法找到下一个可用的位置来存储冲突的元素。常见的探测方法包括线性探测、二次探测和双重哈希等。
+
+　　4.再哈希(Rehashing)
+　　当哈希表的负载因子(即存储元素数量与哈希表大小的比值)过高时，进行扩容操作。扩容后的哈希表大小增加，可以降低碰撞的概率。
+
+　　5.完美哈希函数
+　　针对特定的输入集合，设计一个完全没有碰撞的哈希函数。这种方法适用于已知输入集合且不会改变的情况，但对于通用的哈希表实现来说较为复杂。
+
+
+10.1 原地hash ---> missingFirstPositive , findDuplicated in o(n) time and o(n) space
+类似counting sourt 对于取值范围较小的可以适用 (1---1000) ---> 原理就是 不断交换数组位置 让 num 跑到 num[num - 1] 的index上 也就是 数 2 取到index 1的位置上.  然后其他不存在的位置肯定就放了不属于他的数
+然后统计这些数就行了
+
+
+
+11.0 字符串匹配问题
+11.1 单模式匹配之中
+--->kmp + robin carp 这两种方法
+一般leetcode题不会让你做 kmp 太复杂了
+rabin carp也比较复杂
+一般都是bf来做
+还有就是 字符串重叠的小技巧
+把string的题看一遍就行
+11.2 多模式 只要考虑trie 即可
+trie tree ->search ---> 要用这个来作为return --> cur is not none and cur.isEnd (要用is not none)
+trie tree dfs 搜索的情况下 要注意 cur.children.value vs cur.chidren[ch] 的用法 参见 autocompletetion的题
+trie tree node 可以加入 word这个变量 用来记录保存下来的word . 这样可以更方便的track 不仅仅是isEnd
+
+Trie vs Dict
+search ---> o(k) k is string length vs o (n)
+
+12.1 树 任何树的题目都可以归纳成为 前中后 + 层序
+任何dfs 想明白递推过程才行。 比如 max min tree这两个
+12.2 bfs的时候 如果用的是deque 那就是popleft 如果用的是普通queue 用的就是pop(0)
+12.3 树在往左走 往右走的时候 不一定要判断是否左右存在,完全取决于method怎么写
+
+12.4 区间操作
+     1 前缀和 区间不可变情况下，o(1)时间内区间查询的范围, 空间复杂度o(n) 前缀和的主要适用场景是频繁对原始数组的某个区间的元素进行查询。
+     2 差分数组 区间不可变的情况下 o(1) 操作对区间进行操作  差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。
+     3 bit
+     4 segement tree(太难了)
+
+12.5 union find todo
+
+13 图 ---》 多叉森林
+13.1 图的构造
+有权以及无权 在python之中用dict 比较好做。
+node的dict 是他的边以及权重（如果是有权图）
+无权的话
+node的边用 list来存储
+
+13。2 图的题 如果是无向图，可能会给你 一个 list[list[int]]的邻接表 ，有向无环图，打印路径
+也可能给你一个list[list[int]]的矩阵 小岛问题
+也可能是给你一个list[edge] 的边的集合 topo排序等复杂问题
+
+出现带权重，就真的比较复杂了。
+
+差不多就是三种类型的题， 因为edge 就是有向的，带权重，或者塔普排序
+
+如果是打印路径之类的题 那就是backtracking的问题，因为要尝试
+
+13.3 dfs bfs
+看模板
+
+图的bfs 和 树的bfs 层序有很大的区别
+树 因为知道当前层的size， 所以需要判断一下 每一层只能取前size个 也就是当前层
+图 不需要，因为图没有当前层的概念。
+对于矩阵的题 图的bfs 就是4个方向的探索
+图只需要用 deque，每次popleft 就可以保证顺序性
+
+
+
+
+
+
+
+dp 动态规划通常有两种解法：top-down和bottom-up。
+https://www.cnblogs.com/mozi-song/p/9615167.html
+top-down通常以递归形式出现，从父问题开始，递归地求解子问题。top-down的求解过程通常与memoization结合，即将计算过的结果缓存在数组或者哈希表等结构中。
+当进入递归求解问题时，先查看缓存中是否已有结果，如果有则直接返回缓存的结果。
+bottom-up通常以循环形式出现。bottom-up的求解过程通常与tabulation结合，
+即先解最小的子问题，解决后将结果记录在表格中（通常是一维或二维数组），解决父问题时直接查表拿到子问题的结果，然后将父问题的结果也填在表中，直到把表格填满，最后填入的就是起始问题的结果
+
+
+dp 数组 i-1 的问题
+wenjing感觉: 应该就是 根据 i的取值范围 比如从1开始 从0 开始 对应的非dp数组 的取值是从0开始的 所以要有i-1的情况
+
+
+额外
+xxxx 如果是inplace的要求 不是不给用额外空间. 而是直接在数组上修改,不返回新的值

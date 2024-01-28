@@ -1,0 +1,14 @@
+queue的题比较少
+主要应用就是PQ
+当然是面试题比较少
+
+python heapq 模块
+heapq.heapify不会把整个array给你排序
+每次pop push都会 reorder
+
+heap 可以push tuble
+默认是按照第一个元素排序 当然可以实现自己的 heapsort
+
+
+todo 1296 是哈希表的题
+todo 218 天际线问题 等面经把 太难了 第一次不做

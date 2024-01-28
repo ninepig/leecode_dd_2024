@@ -1,0 +1,17 @@
+349 350
+1296 --> https://leetcode.cn/problems/divide-array-in-sets-of-k-consecutive-numbers/solutions/101809/hua-fen-shu-zu-wei-lian-xu-shu-zi-de-ji-he-by-le-2/
+本质是hashtable + 贪心 ,因为对于当前数,一定有x+k 满足条件
+class Solution:
+    def isPossibleDivide(self, nums: List[int], k: int) -> bool:
+        if len(nums) % k > 0:
+            return False
+        nums.sort()
+        cnt = Counter(nums)
+        for x in nums:
+            if cnt[x] == 0:
+                continue
+            for num in range(x, x + k):
+                if cnt[num] == 0:
+                    return False
+                cnt[num] -= 1
+        return True

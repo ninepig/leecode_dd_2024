@@ -1,0 +1,29 @@
+https://zhuanlan.zhihu.com/p/214747022
+图是否有环的判断
+
+大部分树的travel 都是dfs
+
+小岛系列
+https://labuladong.github.io/algo/di-san-zha-24031/bao-li-sou-96f79/yi-wen-mia-4f482/
+
+
+visit 数组是一定要存在的,如果不在原数组上做改动。
+如果像小岛 数组访问这样的 有一个代表数字的值存在 可以用来充当数组
+
+
+bfs 的时候逻辑一定要bfs层处理 也就是pop之后处理 要不然逻辑会乱 （主要是当你把出发节点放入queue时 是否有处理过 这点很重要）
+参见733
+
+bfs之中 如果遇到从地图中某个点出发的问题
+把所有的点加入queue 。 再出发。 可以保证每个点都是最近的 （每次bfs都是距离增加1，所以只要目标点被访问过了，肯定可以保证是最近的）
+详见542
+
+topo排序之中
+  if len(indegrees) != len(order):
+  能判断有没有环 
+
+很多背包问题 bfs 能做
+类似 279 、 322
+
+dp + topo
+2050

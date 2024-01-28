@@ -1,0 +1,20 @@
+todo 1296 是哈希表的题
+
+哈希是一个算法
+bucket[hash_key]--> 真的内容要存放在数组之中
+
+set 就是存单独value
+hashmap  就是存 （key， value）
+
+
+python 计数的方法
+
+for num in num1:
+    htable[num] = htable.get(num,0) + 1
+
+
+for num in nums1:
+    ## 这个setDefault，如果为空 则设为1 类似 ,同理getDefault 如果不存在 则为1
+    # if num not in htable:
+    #     htable[num] = 1
+    htable.setdefault(num,1)

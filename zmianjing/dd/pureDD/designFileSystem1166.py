@@ -47,8 +47,8 @@ class Trie:
         for path in paths:
             if path not in node.children:
                 return False
-            node= node.children[path]
             parent = node
+            node= node.children[path]
             lastPath = path
         del parent[lastPath] ## delete LastNode, this node has value
         return True

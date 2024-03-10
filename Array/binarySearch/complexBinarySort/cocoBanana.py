@@ -23,7 +23,7 @@ class Solution:
             time += (pile + speed - 1) // speed
         return time <= hour
 
-    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+    def minEatingSpeed(self, piles: list[int], h: int) -> int:
         left, right = 1, max(piles)
 
         while left < right:

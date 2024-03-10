@@ -23,7 +23,7 @@
      如果只是dict() 则需要给key 初始化值
 
 
-     orignalCounter = collections.defaultdict(int)
+     orignalCounter = collections.defaultdict(int) ### TODO 一定要注意 这里必须给予 int才可以赋值 也就是需要一个类型参数，作为default value的type
     # python的写法问题
     for char in orignal:
         orignalCounter[char] += 1
@@ -66,7 +66,10 @@
                 replace_char = chr(ord('a') + j)#关键词
   1.23 int <---> list【int]          nums = [int(x) for x in str(target)]  res = sum(d * 10 ** i for i, d in enumerate(nums[::-1]))
   1.24 int judge    return res if res < 2 ** 31 else -1 #越界 很重要
-
+  1.25 python 先按照 list[0]排序，再按照 list[1]排序      envelopes.sort(key=lambda x: (x[0],-x[1])) 参见俄罗斯套娃
+  1.26 python 如果对于function 加了 @cache 装饰符号（decorator） 他就可以把 function 里面计算的数值memorize ，对于dp， dfs 很有用
+  1.27 python matrix的inital         dp = [[0 for _ in range(col)] for _ in range(row)] ## 先col， 再row
+  1.28 在 Python 中，使用乘号 * 可以用于对列表（list）进行重复操作,是组成一个list， 而不是多个list， 要组成多个list 还是要用【xxx for _ in range(Xx）】
 3 二分查找细节
 3.1区间得开闭问题
 [left, right] [left,right)
@@ -377,9 +380,17 @@ node的边用 list来存储
 对于矩阵的题 图的bfs 就是4个方向的探索
 图只需要用 deque，每次popleft 就可以保证顺序性
 
-
-
-
+dfs小技巧
+利用flag 来作为true/false的返回
+小岛问题 closed island / counting subisland
+    def dfs(x, y):
+            isSubIsland = True
+            if 0 <= x < rows and 0 <= y < cols and grid2[x][y] == 1:
+                if grid1[x][y] != 1: return False
+                grid2[x][y] = -1
+                for dx, dy in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
+                    isSubIsland &= dfs(x + dx, y + dy)
+            return isSubIsland
 
 
 
@@ -393,6 +404,11 @@ bottom-up通常以循环形式出现。bottom-up的求解过程通常与tabulati
 
 dp 数组 i-1 的问题
 wenjing感觉: 应该就是 根据 i的取值范围 比如从1开始 从0 开始 对应的非dp数组 的取值是从0开始的 所以要有i-1的情况
+
+
+小技巧：
+hashmap 保存 value - idx 的pair 很多地方都会使用到
+
 
 
 额外

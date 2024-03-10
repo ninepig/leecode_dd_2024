@@ -29,7 +29,7 @@ class solution:
         # 将所有兼职组装为列表形式[[start, end, profit]]
         zip_list = list(zip(startTime, endTime, profit))
 
-        valid_jobs = [item for item in zip_List if item[0] >= start_time and item[1] <= end_time]
+        valid_jobs = [item for item in zip_list if item[0] >= start_time and item[1] <= end_time]
         ## 剩下的就和1235的做法一样了
         jobs = sorted(valid_jobs, key=lambda x: x[1])  # sorted by end time
         # 根据endTime排序这些兼职
@@ -68,8 +68,6 @@ class solution:
         # state
         # dp[i] = max(dp[i-1], dp[k] + profit[i - 1])
         # 在第i-1份工作之前 我们最多可以做到第k份工作, 这样比较就是
-        ## TODO
-        ## https://stackoverflow.com/questions/20908047/using-bisect-in-a-list-of-tuples
         n = len(valid_delivery)
         dp = [0] * (n + 1)
         for i in range(1, n + 1):
@@ -80,7 +78,6 @@ class solution:
             bisect.bisect_right returns the rightmost place in the sorted list to insert the given element.
             我们用第i-1份工的开始时间去search，在结束时间内找最右侧的值，小于等于第i-1份工开始的时间。 这个就是第k份工的结束时间（最大化，所以用bisect_right）
             '''
-            ## todo bisect 需要加 key  = lambda 来指定某个search的列  https://stackoverflow.com/questions/20908047/using-bisect-in-a-list-of-tuples
             k = bisect_right(valid_delivery, valid_delivery[i - 1][1], hi=i)
             dp[i] = max(dp[i - 1], dp[k] + valid_delivery[i - 1][2]) # i is the index from 1 , so we need -1 here
         return dp[n]

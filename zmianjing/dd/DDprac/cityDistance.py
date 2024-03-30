@@ -153,7 +153,6 @@ class Solution:
                     # higher_city = bisect.bisect_right(target_cities,tatarget)
                     # lower_city =bisect.bisect_left(target_cities,target)
                     # print(higher_city,lower_city)
-                    # todo test python binary search
                     # break
                     lower_city, higher_city = self.binarySearchXcity(target_city,target_cities)
                     if lower_city :
@@ -255,5 +254,5 @@ if __name__ == '__main__':
     ys = [1, 2, 5, 3, 4, 2, 0, 0]
     query_cities = ['axx', 'axy', 'abs','add']
     solution = Solution()
-    # print(solution.queryCities(xs, ys, cities, query_cities))
+    print(solution.queryCities(xs, ys, cities, query_cities))
     print(solution.queryCitiesBSway(xs, ys, cities, query_cities))

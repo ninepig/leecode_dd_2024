@@ -65,7 +65,7 @@ class Solution:
             left_s, left_s_path = (0, []) if left_s <= 0 else (left_s, left_s_path)
             right_s, right_s_path = (0, []) if right_s <= 0 else (right_s, right_s_path)
 
-            ## 计算当前节点的最大值，最大path
+            ## 计算包含当前节点的最大值，最大path
             ## 如果左侧大于右侧
             if left_s > right_s:
                 ## current sum 就取 左侧 + 当前值
@@ -73,7 +73,7 @@ class Solution:
             else:
                 curr_s, curr_s_path = right_s + node.val, right_s_path + [node.val]
 
-            ## 如果两边都有 ，计算
+            ## 如果两边都有，则表示左右都有路径，更新max值的path
             if node.left and node.right:  ##最大值在左侧/右侧/当前
                 if left_m == max(left_m, right_m, left_s + right_s + node.val):
                     curr_m, curr_m_path = left_m, left_m_path

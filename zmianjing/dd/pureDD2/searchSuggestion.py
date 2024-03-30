@@ -47,7 +47,7 @@ class tire:
 class HeapProd(str):
     def __init__(self,s:str):
         self.string = s
-
+    ## 对于正常排序， a < b 就是升序 --》 我们这里要降序 就是最大堆， 要把lex order最大的放在头部。 因为这样可以出栈
     def __lt__(self, other):
         return self.string > other.string ## 最大堆，push smallest to the bottom of heap
 
@@ -176,3 +176,4 @@ class Solution:
             if word == products[i][:len(word)]:
                 similar_elements.append(products[i])
         return similar_elements
+

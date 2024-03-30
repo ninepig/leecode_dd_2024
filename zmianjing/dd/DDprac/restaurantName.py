@@ -73,7 +73,7 @@ class Solution:
             else:
                 counter +=  name_dict[char] ## 不存在字符储量
 
-        ## 因为这个是算anagram ，所以目标是字符出现次数一样
+        ## 因为这个是算anagram ，所以目标是字符出现次数
         return counter
 
 

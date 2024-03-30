@@ -1,7 +1,7 @@
 class TreeNode(object):
-    def __init__(self):
-        self.key = str
-        self.value = str
+    def __init__(self,key,value):
+        self.key = key
+        self.value = value
         self.children = []
 
 
@@ -56,3 +56,23 @@ class Solution :
             count += self.get_node_count(child)
 
         return count
+
+
+
+
+test = Solution()
+node1 = TreeNode(5,4)
+node2 = TreeNode(4,3)
+node3 = TreeNode(4,4)
+node1.children.append(node2)
+node1.children.append(node3)
+print(test.get_node_count(node1))
+
+node4 = TreeNode(5,4)
+node5 = TreeNode(4,3)
+node6 = TreeNode(4,4)
+
+node4.children.append(node5)
+node4.children.append(node6)
+
+print(test.compute_diff(node1,node2))

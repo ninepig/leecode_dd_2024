@@ -24,16 +24,31 @@ WalkingSpeed = 1
 DrivingSpeed = 2
 
 def pickingUpTime(restaurant, parkingTime, WalkingSpeed, DrivingSpeed):
-    N = len(restaurant)
-    drivingTime = (restaurant[-1] - restaurant[0]) / DrivingSpeed
-    chooseParking = parkingTime[0]
-    chooseWalking = math.inf
+    '''
+        贪心题
+        1 对于去第n家restaurant math.min(parking in n -1, waling to n- 1)
+        2 if we choose parking in n - 1  we can walk to n or drive to n
+        3 if we choose walking to n - 1  we can only drive to n (avoid 2 walking)
+        4 drive time is fix , since we need drive car to end
+    '''
+    drive_time = (restaurant[-1] - restaurant[0])/ DrivingSpeed
+    ## two valirable record if we choose walking or driving at n-1 restaunt
+    chooseWalking = math.inf # we will choose driving in first one
+    chooseDriving = parkingTime[0]
+    for i in range(1,len(restaurant)):
+        walking_time = (restaurant[i]-restaurant[i-1]) * 2 / WalkingSpeed
+        ## n's time depending on n - 1 's status
+        ## if we choose wlaking to n, n-1 must be choosing drivieng, can not choose walking in row
+        chooseDriving, chooseWalking= min(chooseDriving,chooseWalking) + parkingTime[i], chooseDriving + walking_time
+        ## Follow Up是如果可以连着走多家店怎么改，只要改一下更新choosingWalking的逻辑就行。
+        # 因为你可以连续走。所以选开车或者走路最省时间的就可以了， 对于每家店的walkingtime 固定的。
+        #chooseDriving, chooseWalking = min(chooseDriving, chooseWalking) + parkingTime[i], min(chooseDriving, chooseWalking) + walking_time
 
-    for i in range(1, N):
-        walkingTime = 2 * (restaurant[i] - restaurant[i-1])/ WalkingSpeed
-        chooseParking, chooseWalking =  min(chooseParking, chooseWalking) + parkingTime[i], chooseParking + walkingTime
+    return min(chooseWalking,chooseDriving) + drive_time
 
-    return min(chooseParking, chooseWalking) + drivingTime
 
-time = pickingUpTime(restaurant, parkingTime, WalkingSpeed, DrivingSpeed)
-print(time)
+restaurant = [0, 3, 5, 10, 15]
+parkingTime = [3, 3, 4, 5, 1]
+WalkingSpeed = 1
+DrivingSpeed = 2
+print(pickingUpTime(restaurant,parkingTime,WalkingSpeed,DrivingSpeed))

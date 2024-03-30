@@ -1,14 +1,10 @@
-n = 10
-board = [[0] * n for _ in range(n)]
-p1_x = [0, 0, 0, 0, 0]
-p1_y = [1, 2, 3, 4, 5]
-p2_x = [7, 3, 4, 7, 2]
-p2_y = [3, 2, 3, 4, 2]
+
 
 
 def search_line(a, b, x):
     # 1.行搜索
     count = 1
+    # flag 1 2 代表左右有没有断 是否连成排
     flag1 = flag2 = 0
     for i in range(1, 5):
         if flag1 == 0 and b - i >= 0 and board[a][b - i] == x:
@@ -90,6 +86,13 @@ def search(a, b, x):
     return search_line(a, b, x) or search_column(a, b, x) or \
     search_left(a, b, x) or search_right(a, b, x)
 
+
+n = 10
+board = [[0] * n for _ in range(n)]
+p1_x = [0, 0, 0, 0, 0]
+p1_y = [1, 2, 3, 4, 5]
+p2_x = [7, 3, 4, 7, 2]
+p2_y = [3, 2, 3, 4, 2]
 
 for i in range(len(p1_x)):
     p1_win = search(p1_x[i], p1_y[i], 1)

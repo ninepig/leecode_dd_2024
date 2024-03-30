@@ -84,28 +84,4 @@ if __name__ == '__main__':
     k_lists = ["five kkkk", "fiee guys", "eivf kkys"]
     orignal = "five guys"
     test = solution()
-    print(test.findSimilarRestaunt(orignal,k_lists,2))
-
-    # orignalCounter = collections.defaultdict()
-    # for char in orignal:
-    # #     if char not in orignalCounter:
-    # #         orignalCounter[char] = 1
-    # #     else:
-    #     orignalCounter[char] += 1
-
-    # orignalCounter = collections.defaultdict(int)
-    # python的写法问题
-    # for char in orignal:
-    #     orignalCounter[char] += 1
-
-
-    # orignalCounter = dict()
-    # # python的写法问题
-    # for char in orignal:
-    #     if char not in orignalCounter:
-    #         orignalCounter[char] = 1
-    #     else:
-    #         orignalCounter[char] += 1
-    #
-    # # print(orignalCounter)
-    # print(orignalCounter)
+    print(test.findKanagramRestaunt(orignal,k_lists,2))

@@ -16,11 +16,11 @@ dd 题
 https://leetcode.com/discuss/interview-question/2028170/doordash-phone-screen
     '''
     # binary search nlogn
-    def minEatingSpeed(self, piles: list[int], h: int) -> int:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
         left , right = 1 , max(piles)
         while left < right :
             mid = left + (right - left) // 2
-            if self.canEat(mid,piles) > h:
+            if self.canEat(mid,piles) < h:
                 left = mid + 1
             else:
                 right = mid

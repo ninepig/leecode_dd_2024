@@ -39,9 +39,9 @@ class Solution:
         for i in range(numCourses):
             graph[i] = []
 
-        # graph ---> indegree
+        # graph ---> indegree v is prerequest, u is current
         for u,v in prerequisites:
-            graph[v].append(v)
+            graph[v].append(u)
 
         indegreeDict = {u:0 for u in graph}
 

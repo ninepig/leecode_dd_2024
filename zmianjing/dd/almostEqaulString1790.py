@@ -44,7 +44,7 @@ class Solution:
         return s1[a] == s2[b] and s1[b] == s2[a]
 
     # 作者：宫水三叶
-    # 链接：https: // leetcode.cn / problems / check - if -one - string - swap - can - make - strings - equal / solutions / 1883347 / by - ac_oier - qeul /
+    # 链接：https: // rareleetcode.cn / problems / check - if -one - string - swap - can - make - strings - equal / solutions / 1883347 / by - ac_oier - qeul /
     # 来源：力扣（LeetCode）
     # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
         ## 更直接点
@@ -60,6 +60,6 @@ class Solution:
         return cnt != 1
 
     # 作者：ylb
-    # 链接：https: // leetcode.cn / problems / check - if -one - string - swap - can - make - strings - equal / solutions / 1 / by - lcbin - dy58 /
+    # 链接：https: // rareleetcode.cn / problems / check - if -one - string - swap - can - make - strings - equal / solutions / 1 / by - lcbin - dy58 /
     # 来源：力扣（LeetCode）
     # 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

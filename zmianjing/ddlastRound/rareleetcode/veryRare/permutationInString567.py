@@ -1,7 +1,6 @@
 from collections import Counter
 
-'''很少见 就一个ml面试出了 应该不可能
-sliding windows + couter'''
+'''很少见 就一个ml面试出了 应该不可能'''
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
         cntr, w, matched = Counter(s1), len(s1), 0

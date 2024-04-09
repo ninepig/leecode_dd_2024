@@ -44,9 +44,9 @@ Given a string s and a dictionary of strings wordDict, return true if s can be s
 Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
 
-Input: s = "leetcode", wordDict = ["leet","code"]
+Input: s = "rareleetcode", wordDict = ["leet","code"]
 Output: true
-Explanation: Return true because "leetcode" can be segmented as "leet code".
+Explanation: Return true because "rareleetcode" can be segmented as "leet code".
 
 '''
 

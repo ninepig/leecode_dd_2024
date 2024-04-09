@@ -50,7 +50,7 @@ class Trie:
                 if ch not in node.children:
                     return  False
                 child = node.children[ch]
-                if child is not  None and dfs(index + 1, child)
+                if child is not None and dfs(index + 1, child):
                     return True
 
             return False

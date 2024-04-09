@@ -1,5 +1,5 @@
 '''
-
+https://www.1point3acres.com/bbs/thread-919902-1-1.html
 Given list of OrderActivity and basePay/minute for one Dasher, calculate the total pay of the dasher. Consider this is for one dasher, and all activities happened within single day
 class OrderActivity {
     int hour; // the hour of this event happened
@@ -311,5 +311,5 @@ if __name__ == '__main__':
     order_list = [orderActivity1, orderActivity2,  orderActivity5, orderActivity6]
     order_list2 = [orderActivity1,orderActivity2,orderActivity3,orderActivity4,orderActivity5,orderActivity6,orderActivity7,orderActivity8]
     sol = solution()
-    # print(sol.getTotalIncome(start_time,end_time, order_list))
+    print(sol.getTotalIncome(start_time,end_time, order_list))
     print(sol.getTotalIncomeWithWaiting(start_time,end_time,order_list2))

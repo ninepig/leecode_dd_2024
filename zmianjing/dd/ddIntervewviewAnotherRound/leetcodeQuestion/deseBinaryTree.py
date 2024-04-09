@@ -1,3 +1,4 @@
+import collections
 from typing import List
 
 
@@ -7,35 +8,26 @@ class TreeNode:
         self.left = None
         self.right = None
 
-class solution:
 
-    def seriliaze(self,root):
-        data = []
-        def preOrderSerlizae(node:TreeNode):
-            if not node:
-                data.append("null")
-                return  ## end dfs
-            data.append(str(node.val))
-            preOrderSerlizae(node.left)
-            preOrderSerlizae(node.right)
+class Codec:
 
-        preOrderSerlizae(root)
-        return data
+    def serialize(self, root):
+        if not root:
+            return 'None'
+        return str(root.val) + ',' + str(self.serialize(root.left)) + ',' + str(self.serialize(root.right))
 
-    def deserilaize(self,data:str):
-        data = data.split(',')
-        self.i = 0
-        def preOrder():
-            if data[self.i] == 'N':
-                self.i += 1
+    def deserialize(self, data):
+        def dfs(datalist):
+            val = datalist.pop(0)
+            if val == 'None':
                 return None
-            root = TreeNode(int(data[self.i]))
-            self.i += 1
-            root.left = preOrder()
-            root.right =preOrder()
+            root = TreeNode(int(val))
+            root.left = dfs(datalist)
+            root.right = dfs(datalist)
             return root
 
-        return preOrder()
+        datalist = data.split(',')
+        return dfs(datalist)
 
 
 # Definition for a Node.
@@ -43,8 +35,10 @@ class Node(object):
     def __init__(self, val, children):
         self.val = val
         self.children = children
-class Serialize_and_Deserialize_N_ary_Tree:
 
+
+class Serialize_and_Deserialize_N_ary_Tree:
+    #
     class Codec:
 
         SPLITER = ","
@@ -80,10 +74,8 @@ class Serialize_and_Deserialize_N_ary_Tree:
             if val == self.NULL_NODE:
                 # pop the "0" added from sb.append(self.NULL_NODE + self.SPLITER + "0")
                 size = int(nodes.pop(0)) # here now size=0, but do nothing
-
                 # or, remove above 'size=...' line, but not adding "0" for null-node
                 # which is better I think
-
                 return None
             else:
                 node = Node()

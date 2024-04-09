@@ -11,10 +11,8 @@ class Sudoku:
         for i in range(9):
             for j in range(9):
                 num = board[i][j]
-
                 if not num.isdigit():
                     continue
-
                 sec = (i // 3, j // 3)
                 if num in row_bag[i] or num in col_bag[j] or num in sec_bag[sec]:
                     return False
@@ -24,7 +22,6 @@ class Sudoku:
                     sec_bag[sec].add(num)
 
         return True
-
 
     def isValid(self, row, col, c, grid):
         for i in range(9):
@@ -52,9 +49,8 @@ class Sudoku:
                             grid[i][j] = c
                             if self.solve(grid):
                                 return True
-                            ## backtrack必须是在这一层。。
-                            else:
-                                grid[i][j] = '.' ## backtrack
+                            ## backtrack if we dont find valied in this number
+                            grid[i][j] = '.' ## backtrack
                     return False
 
         return True

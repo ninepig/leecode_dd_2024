@@ -239,6 +239,6 @@ if __name__ == '__main__':
     ys = [1, 2, 5, 3, 4, 2, 0, 0]
     query_cities = ['axx', 'axy', 'abs','add']
     solution = solution()
-    # print(solution.queryCities(xs, ys, cities, query_cities))
+    print(solution.queryCities(xs, ys, cities, query_cities))
     # ['abc', 'abc', 'add', 'abs']
-    print(solution.queryCitiesBinarySearchWay(xs, ys, cities, query_cities))
+    # print(solution.queryCitiesBinarySearchWay(xs, ys, cities, query_cities))

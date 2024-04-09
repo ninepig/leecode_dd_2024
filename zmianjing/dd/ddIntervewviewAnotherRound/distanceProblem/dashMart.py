@@ -94,8 +94,6 @@ class solution:
                 res.append(distance_map[location[0],location[1]])
 
         return res
-
-    def getMostCustomerCount(self, locations: list[list[int]], grid: list[list[str]]) -> list[int]:
         '''
         using bfs from any customer.
         find closed store from that customer
@@ -103,52 +101,101 @@ class solution:
 
         loop to output customer count of each store
         '''
+
+    def getMostCustomerCount(self, locations: list[list[int]], grid: list[list[str]]):
+
         if not locations or not grid:
             return []
-        store_customer_map = dict()
-        queue = []
-        visited = []
-        store_found = False ## flag to stop bfs if we found a store
 
+        ## record  distance from each D , which starting from D
+        store_customer_dict = dict()
+        queue = []
         rows = len(grid)
         cols = len(grid[0])
-        dirs = [(-1,0),(1,0),(0,1),(0,-1)]
+        visited = set()
+        dirs = [(-1, 0), (1, 0), (0, 1), (0, -1)]
 
         for i in range(rows):
             for j in range(cols):
-                if grid[i][j] == 'C' : ## start from a customer
+                ## starting from c
+                if grid[i][j] == 'C':
                     queue.clear()
                     visited.clear()
+                    ## store found then need break
                     store_found = False
                     queue.append((i,j))
                     while queue:
-                        cur = queue.pop()
-                        cur_x , cur_y = cur[0],cur[1]
-                        for dx,dy in dirs:
-                            new_x = cur_x + dx
-                            new_y = cur_y + dy
-                            if 0 <= new_x < rows and 0 <= new_y < cols and (new_x,new_y) not in visited and not store_found:
-                                if grid[new_x][new_y] == ' ' or grid[new_x][new_y] == 'C': ## if we can pass
-                                    visited.append((new_x,new_y))
-                                    queue.append((new_x,new_y))
-                                elif grid[new_x][new_y] == 'D': ## We found a store
-                                    store_found = True
-                                    ## update store_customer map
-                                    if (new_x,new_y) not in store_customer_map:
-                                        store_customer_map[(new_x,new_y)] = 1
+                        current_pos = queue.pop()
+                        current_x , current_y = current_pos[0],current_pos[1]
+                        for dir in dirs:
+                            new_x = current_x + dir[0]
+                            new_y = current_y + dir[1]
+                            if 0<= new_x < rows and 0 <= new_y < cols and (new_x,new_y) not in visited and not store_found:
+                                if grid[new_x][new_y] == 'D' : # we found a store
+                                    if (new_x,new_y) not in store_customer_dict:
+                                        store_customer_dict[(new_x,new_y)] = 1
                                     else:
-                                        store_customer_map[(new_x,new_y)] += 1
+                                        store_customer_dict[(new_x,new_y)] += 1
+                                    store_found = True
+                                if grid[new_x][new_y] == ' ' or grid[new_x][new_y] == 'C':
+                                    visited.add((new_x,new_y))
+                                    queue.append((new_x,new_y)) ## free road or customer , we can pass
+        print(store_customer_dict)
+        max_value = max(store_customer_dict.values())
+        res = []
+        for key in store_customer_dict.keys():
+            if store_customer_dict[key] == max_value:
+                res.append(key)
+
+        return res
 
 
-            max_value = max(store_customer_map.values())
-            res = []
-            for key in store_customer_map.keys():
-                if store_customer_map[key] == max_value:
-                    res.append(key)
+    def getClosedMartMaxCustomer(self, locations: list[list[int]], grid: list[list[str]]) :
+        ## location could overrange
+        if not locations or not grid:
+            return []
 
-            return res
+        ## record  distance from each D , which starting from D
+        store_customer_dict = dict()
+        queue = []
+        rows = len(grid)
+        cols = len(grid[0])
+        visited = set()
+        dirs = [(-1, 0), (1, 0), (0, 1), (0, -1)]
 
+        for i in range(rows):
+            for j in range(cols):
+                ## starting from c
+                if grid[i][j] == 'C':
+                    queue.clear()
+                    visited.clear()
+                    ## store found then need break
+                    store_found = False
+                    queue.append((i,j))
+                    while queue:
+                        current_pos = queue.pop()
+                        current_x , current_y = current_pos[0],current_pos[1]
+                        for dir in dirs:
+                            new_x = current_x + dir[0]
+                            new_y = current_y + dir[1]
+                            if 0<= new_x < rows and 0 <= new_y < cols and (new_x,new_y) not in visited and not store_found:
+                                if grid[new_x][new_y] == 'D' : # we found a store
+                                    if (new_x,new_y) not in store_customer_dict:
+                                        store_customer_dict[(new_x,new_y)] = 1
+                                    else:
+                                        store_customer_dict[(new_x,new_y)] += 1
+                                    store_found = True
+                                if grid[new_x][new_y] == ' ' or grid[new_x][new_y] == 'C':
+                                    visited.add((new_x,new_y))
+                                    queue.append((new_x,new_y)) ## free road or customer , we can pass
+        print(store_customer_dict)
+        max_value = max(store_customer_dict.values())
+        res = []
+        for item,value in store_customer_dict.items():
+            if value == max_value:
+                res.append(item)
 
+        return res
 
 
 
@@ -167,8 +214,8 @@ customer_city = [
     ['X', 'C', 'C', 'D', 'C', ' ', 'X', ' ', 'X'],
     ['X', ' ', 'X', 'X', ' ', ' ', ' ', ' ', 'X'],
     [' ', ' ', 'C', 'D', 'X', 'X', ' ', 'X', ' '],
-    [' ', ' ', ' ', 'D', ' ', 'X', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', 'X'],
+    [' ', ' ', 'C', 'D', 'C', 'X', ' ', ' ', ' '],
+    [' ', ' ', ' ', 'C', ' ', 'X', ' ', ' ', 'X'],
     [' ', ' ', ' ', ' ', 'X', ' ', ' ', 'X', 'X']
 ]
 
@@ -180,3 +227,4 @@ locations = [
 ]
 print(sol.getClosedMart(locations, city))
 print(sol.getMostCustomerCount(locations,customer_city))
+print(sol.getClosedMartMaxCustomer(locations,customer_city))

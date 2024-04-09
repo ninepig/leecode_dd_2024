@@ -33,7 +33,7 @@ Examples below:
 1 check if valied
 2 print all permutation 第二小题 如果要做到 p1 必须 在p2 之前就挺难的
 3 find longest valid path (如果是这个的话。。hashmap不就能解决吗)
-4 推导所有数量的过程 https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/ leetcode 原题
+4 推导所有数量的过程 https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/ rareleetcode 原题
 
 目前看到这题有两种变形
 第一种感觉比较少

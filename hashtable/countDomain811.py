@@ -25,7 +25,7 @@ class Solution:
         return res
 
 
-# domain= "discuss.leetcode.com"
+# domain= "discuss.rareleetcode.com"
 # domain_list = domain.split('.')
 # print(domain_list[-1])
 # array = [1,2,3,3,4,5,6,7]

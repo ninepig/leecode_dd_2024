@@ -38,10 +38,6 @@ class UnionFind:
         # self.count -= 1
         return True
 
-    # def is_connect(self,x,y):
-        # return self.find(x) == self.find(y)
-
-
 
 class Solution:
     def largestIsland(self, grid: List[List[int]]) -> int:
@@ -93,73 +89,6 @@ dfs 版本
 https://leetcode.cn/problems/making-a-large-island/solutions/790816/827zui-da-ren-gong-dao-python3-shi-yong-wwkd5
 '''
 class Solution2:
-    def largestIsland(self, grid: List[List[int]]) -> int:
-        ## First, compute the area size of each island
-        m, n = len(grid), len(grid[0])
-        idxIsland = 2  # Index the Islands from 2
-        markIsland = dict()
-
-        def inArea(i, j):
-            return 0 <= i < m and 0 <= j < n
-
-        def areaSize(idxIsland, i, j):
-            if not inArea(i, j):
-                return 0
-            if grid[i][j] != 1:
-                return 0
-            grid[i][j] = idxIsland
-            return 1 + areaSize(idxIsland, i - 1, j) + areaSize(idxIsland, i + 1, j) + areaSize(idxIsland, i,
-                                                                                                j - 1) + areaSize(
-                idxIsland, i, j + 1)
-
-        for i in range(m):
-            for j in range(n):
-                if grid[i][j] == 1:
-                    size = areaSize(idxIsland, i, j)
-                    markIsland[idxIsland] = size
-                    idxIsland += 1
-
-        if len(markIsland) == 0:
-            return 1
-
-        if max(markIsland.values()) == m * n:
-            return m * n
-
-        ## Second, check each sea pixel and its neighbor islands' size
-        def area_idx(i, j):
-            if inArea(i, j):
-                idx = grid[i][j]
-                if idx == 0:
-                    return 0, 0
-                size = markIsland[idx]
-                return idx, size
-            return 0, 0
-
-        # compute the total size of neihgbor Islands
-
-        def neighbor_areas(i, j):
-            areas_dict = dict()
-            moves = {(0, 1), (0, -1), (-1, 0), (1, 0)}
-            for move in moves:
-                r = i + move[0]
-                c = j + move[1]
-                idx, size = area_idx(r, c)
-                # save the area size of the neighbor islands
-                if idx not in areas_dict:
-                    areas_dict.update({idx: size})
-            return sum(areas_dict.values())
-
-        # compute the max area size with the extra sea connection
-        res = 0
-        for i in range(m):
-            for j in range(n):
-                if grid[i][j] == 0:
-                    size = 1 + neighbor_areas(i, j)
-                    res = max(res, size)
-        return res
-
-
-
     def largestIslandWenjing(self, grid: List[List[int]]) -> int:
         ## cal all island area and store it
         rows = len(grid)
@@ -169,7 +98,7 @@ class Solution2:
         dirs = [(1,0),(-1,0),(0,1),(0,-1)]
 
         def getArea(row,col,idx):
-            if not( 0<= row < rows or 0 <= col < cols):
+            if not( 0<= row < rows and 0 <= col < cols):
                 return 0
             if grid[row][col] != 1 : # not island
                 return 0
@@ -190,15 +119,14 @@ class Solution2:
 
         # after we have all island area size, we try to flip
 
-        if max(idx_area_map) == 0:
+        if len(idx_area_map) == 0:
             return 1 # no island
-        if max(idx_area_map) == rows * cols:
+        if max(idx_area_map.values()) == rows * cols:
             return rows * cols ## only 1 island, no need to go further
-
         ans = 0
         for i in range(rows):
             for j in range(cols):
-                if grid[i][j] == 1:
+                if grid[i][j] != 0:
                     ans = max(ans,idx_area_map[grid[i][j]]) #
                 else:
                     ## cal 4 surruranding island
@@ -207,14 +135,23 @@ class Solution2:
                     for dir in dirs:
                         new_x = dir[0] + i
                         new_y = dir[1] + j
+                        ## record 4 neighbour's size , and sum them
                         if 0 <= new_x < rows and 0 <= new_y < cols:
+                            ## get idx by grid value
                             new_idx = grid[new_x][new_y]
                             neighbour_area = 0
                             if new_idx in idx_area_map:
                                 neighbour_area = idx_area_map[new_idx]
+                            ## if new idx is not belong to any neighbour, we add one
                             if new_idx not in neighbourisland_dict:
                                 neighbourisland_dict[new_idx] = neighbour_area
                     cur += sum(neighbourisland_dict.values())
                     ans = max(ans,cur)
 
         return ans
+
+
+if __name__ == "__main__":
+    input = [[1,1],[1,1]]
+    sol = Solution2()
+    print(sol.largestIslandWenjing(input))

@@ -33,7 +33,7 @@ Examples below:
 1 check if valied
 2 print all permutation 第二小题 如果要做到 p1 必须 在p2 之前就挺难的
 3 find longest valid path (如果是这个的话。。hashmap不就能解决吗)
-4 推导所有数量的过程 https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/ leetcode 原题
+4 推导所有数量的过程 https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/ rareleetcode 原题
 
 目前看到这题有两种变形
 第一种感觉比较少
@@ -125,30 +125,23 @@ class Solution:
 
         return res
 
-    ## TODO, o(n2)的暴力法 可以解 if we dont care valid time
-    ## TODO sliding windows？ o(n)  treat this as a sliding windows
     def longestValidSubArray(self,order:list[str]):
         pass
-    ## infer process
+    ## infer process 1359
+
     ## we have 2 n element
     # the first item must be n
     # the rest pair could be 2n - 1
     # so total number (n*2- 1) * n
-
-    ## 621 --> n means duration
-    ##--> max means most number of task
-    ## --> tot means how many task is equal to max
-    ## --> math.max(len(tasks), (max - 1)*(n + 1) + tot
-    def leastInterval(self, tasks: list[str], n: int) -> int:
-        cnts = [0] * 26
-        for c in tasks:
-            cnts[ord(c) - ord('A')] += 1
-        maxv, tot = 0, 0
-        for i in range(26):
-            maxv = max(maxv, cnts[i])
-        for i in range(26):
-            tot += 1 if maxv == cnts[i] else 0
-        return max(len(tasks), (n + 1) * (maxv - 1) + tot)
+    def countOrders(self, n):
+        res, mod = 1, 10 ** 9 + 7
+        for i in range(2, n + 1):
+            res = res * (i * 2 - 1) * (i * 2) / 2 % mod
+        return res
+    ## 最长的 valid 数组 但是感觉只有leetcode上出现过一次 可能是傻逼理解错了？
+    ## TODO, o(n2)的暴力法 可以解 if we dont care valid time
+    ## 不确定有没有这道题
+    ## TODO sliding windows？ o(n)  treat this as a sliding windows
 
 if __name__ == '__main__':
     sol = Solution()

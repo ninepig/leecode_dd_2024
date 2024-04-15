@@ -32,6 +32,7 @@ class Solution:
             target_counter = collections.Counter(target)
             difference = self.compareDifference(target_counter, candidate)
             print(difference)
+            ## need ask if k or mins k
             if difference <= k:
                 res.append(candidate)
 
@@ -51,5 +52,5 @@ orignal_name = "five guys"
 target_list = ["five ugsy", "fiee guys", "eivf guys"]
 target_list_k = ["five kkkk", "fiee guys", "eivf kkys"]
 sol = Solution()
-# print(sol.nameWithOneSwap(target_list,orignal_name))
+print(sol.nameWithOneSwap(target_list, orignal_name))
 print(sol.nameWithkdiff(target_list_k, orignal_name, 2))

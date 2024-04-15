@@ -197,6 +197,7 @@ print("Path:", max_path)
 max_sum = sol.maxPathBewtweenAnyLeafNodeWithoutTag(root)
 print("Maximum path sum between two leaf nodes:", max_sum)
 
+
 root = Node(-15)
 root.left = Node(5)
 root.right = Node(6)
@@ -217,10 +218,10 @@ root.right.right.right.right.tag = False
 root.right.right.right.right.left = Node(10)
 root.right.right.right.right.left.tag = True
 max_sum = sol.maxPathBetweenLeafNodeWithTag(root)
-print("Maximum path sum between two leaf nodes:",max_sum)
+print("Maximum path sum between two leaf nodes has tag:",max_sum)
 
 max_sum,path = sol.maxPathPrintOutBetweenLeafNodeWithTag(root)
-print("Maximum path sum between two leaf nodes:",max_sum)
+print("Maximum path sum between two leaf nodes has tag:",max_sum)
 print(path)
 
 max_sum = sol.maxPathBewtweenAnyLeafNodeWithTag(root)

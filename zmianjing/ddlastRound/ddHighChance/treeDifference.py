@@ -196,7 +196,7 @@ if __name__ == "__main__":
     node13.children.append(node17)
 
     sol = Solution()
-    # print(sol.checkDifference(node1, node11))
+    print(sol.checkDifference(node1, node11))
     count,path = sol.checkDifferencePath(node1,node11)
     print(count)
     for item in path:

@@ -235,8 +235,8 @@ test4 = OrderActivity(6,40,"d",2,1)
 
 testArray = [test,test2,test3,test4]
 sol = Solution()
-print(sol.dasherIncome(testArray,0.3))
-print(sol.dasherIncomeConstantSpace(testArray,0.3))
+# print(sol.dasherIncome(testArray,0.3))
+# print(sol.dasherIncomeConstantSpace(testArray,0.3))
 
 test = OrderActivity(6,15,"p",1,1)
 test2 = OrderActivity(6,30,"p",2,1)
@@ -257,7 +257,7 @@ test8 = OrderActivity(6,55,"d",2,1)
 testArray2 = [test,test2,test3,test4,test5,test6,test7,test8]
 # testArray3 = [test,test2,test7,test8]
 print(sol.dasherIncomeWithWaiting(testArray2,0.3))
-print(sol.dasherIncomeWithWaitingBetter(testArray2,0.3))
+# print(sol.dasherIncomeWithWaitingBetter(testArray2,0.3))
 
 ##todo 测试 peak hour
 

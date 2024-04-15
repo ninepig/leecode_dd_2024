@@ -18,21 +18,37 @@ https://leetcode.com/problems/patching-array/solutions/3242439/330-solution-with
 
 
 
+观察
+s means missing number
+assumme we have every number  [0,s-1]  we can iterative visit x= num[i]
+so we can get [x, x+s-1] every number
 
-Explanation
-大神解释
-Let miss be the smallest sum in [0,n] that we might be missing. Meaning we already know we can build all sums in [0,miss).
-Then if we have a number num <= miss in the given array, we can add it to those smaller sums to build all sums in [0,miss+num).
-If we don't, then we must add such a number to the array, and it's best to add miss itself, to maximize the reach.
+we sort nums ,
+if x <= missing, so we can get every number from [0, x+s-1]
+if x> missing, this means, we can not get missing. so we have to add some number to nums , using greedy
+we add missing number, which we can get maximum is [0,2s - 1]
+
+when missing number bigger than n, we get all number from [1,n]
+
+链接：https://leetcode.cn/problems/patching-array/solutions/2551840/yong-gui-na-fa-zheng-ming-pythonjavacgo-mvyu1/
+
 '''
+
+
 class Solution:
   def minPatches(self, nums: list[int], n: int) -> int:
     miss, i, patches = 1, 0, 0
     while miss <= n:
-        if i < len(nums) and nums[i] <= miss:
-            miss += nums[i]
+        if i < len(nums) and nums[i] <= miss: ## if we can not find missing , then we need add that
+            miss += nums[i] ## we can get every number from s+n[i] --> so missing += n[i]
             i += 1
         else:
+            #max mum we can get is [missing, 2*missing -1]  since we add missing number 
             miss *= 2
             patches += 1
     return patches
+
+test =[1,3]
+n = 6
+sol = Solution()
+print(sol.minPatches(test,n))

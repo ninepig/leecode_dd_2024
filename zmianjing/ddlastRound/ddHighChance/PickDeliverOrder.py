@@ -127,8 +127,9 @@ class Solution:
 
     def longestValidSubArray(self,order:list[str]):
         pass
-    ## infer process 1359
 
+
+    ## infer process 1359
     ## we have 2 n element
     # the first item must be n
     # the rest pair could be 2n - 1

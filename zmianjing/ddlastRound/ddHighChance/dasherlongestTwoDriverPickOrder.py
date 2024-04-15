@@ -73,10 +73,10 @@ def lcs2(text1:str, text2:str):
     return dp[-1][-1]
 
 
-print(lcs2(["chilis", "albertsons", "walmart", "albertsons", "chilis", "mcdonalds", "burger king"],
-          ["chilis", "walmart", "chilis", "albertsons", "burger king", "applebees", "mcdonalds"]))
+# print(lcs(["chilis", "albertsons", "walmart", "albertsons", "chilis", "mcdonalds", "burger king"],
+#           ["chilis", "walmart", "chilis", "albertsons", "burger king", "applebees", "mcdonalds"]))
 
 
-
-print(lcs2(["chilis", "albertsons", "mcdonalds"],
-          ["burger king", "jamba juice", "applebees"]))
+#
+# print(lcs2(["chilis", "albertsons", "mcdonalds"],
+#           ["burger king", "jamba juice", "applebees"]))

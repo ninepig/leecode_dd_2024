@@ -3,7 +3,8 @@ import math
 import random
 
 # Question
-# Given a restaurant geolocation ( longitude / latitude), find 3 closest Dashers (drivers) near the restaurant who can be assigned for delivery, ordered by their distance from the restaurant. In case 2 Dashers are equidistant from the restraunt, use Dasher rating as tie breaker.
+# Given a restaurant geolocation ( longitude / latitude), find 3 closest Dashers (drivers) near the restaurant who can be assigned for delivery, ordered by their distance from the restaurant.
+# In case 2 Dashers are equidistant from the restraunt, use Dasher rating as tie breaker.
 #
 # Each Dasher has 3 properties:
 #
@@ -55,11 +56,7 @@ class ClosestDriver:
 
 def generateDashers(num):
     dashers = []
-    # for i in range(num):
-    #     rating = random.randrange(1, 5)
-    #     latt = random.randrange(100, 200)
-    #     long = random.randrange(100, 200)
-    #     dashers.append(Dasher(i, Location(long, latt), rating))
+
     dashers.append(Dasher(1, Location(5, 5), 5))
     dashers.append(Dasher(2, Location(5, 5), 4))
     dashers.append(Dasher(3, Location(5, 5), 3))
@@ -70,7 +67,5 @@ def generateDashers(num):
 if __name__ == "__main__":
     ##  k closed 所以要用大根堆 ， 自定义这个lt函数 如果distance 相同，我们让rating高的排在前面。 要自己写 尝试下
     dashers = generateDashers(5)
-    # latt = random.randrange(100, 200)
-    # long = random.randrange(100, 200)
     obj = ClosestDriver(dashers, 3, Location(0, 0))
     print(obj.getClosestDriver())

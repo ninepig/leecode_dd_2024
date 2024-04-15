@@ -40,6 +40,7 @@ class Solution:
                 if previousReachableIndex >= len(nums) - 1:
                     return jump
 
+        return jump
 
 
     '''

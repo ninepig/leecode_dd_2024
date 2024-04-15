@@ -7,22 +7,25 @@ class Solution:
         2 same value both expolde
 
     '''
-    def asteroidCollision(self, asteroids: list[int]) -> list[int]:
-        stack = []
-        for star in asteroids:
-            cur_star = True # flag to judge if this star will explode
-            # top of stack is positive and cur is negitave
-            while stack and stack[-1] > 0 > star and cur_star:
-                if abs(stack[-1]) > abs(star):
-                    cur_star = False # cur one explode
-                elif abs(stack[-1]) == abs(star):
-                    cur_star = False
-                    stack.pop(-1) ## both explode
-                else:
-                    stack.pop(-1) ## only stack one explode
 
-            ## stop loop, no more explode for this star
-            if cur_star :
+    def starCollision(self, stars: list[int]):
+        ## sanity check
+        if not stars or len(stars) == 0:
+            raise Exception("wrong input")
+
+        stack = []
+        for star in stars:
+            cur_exists = True
+            while stack and stack[-1] > 0 > star and cur_exists:
+                if abs(stack[-1]) > abs(star):  ## current star explode
+                    cur_exists = False
+                elif abs(stack[-1]) == abs(star):  ## both explode
+                    stack.pop(-1)
+                    cur_exists = False
+                else:  ## top one explode
+                    stack.pop(-1)
+            ## if cur star not explode , we push to stack
+            if cur_exists:
                 stack.append(star)
 
         return stack
@@ -38,6 +41,7 @@ class Solution:
             if abs(asteroids[i]) == abs(asteroids[i+1]):
                 asteroids[i+1] = asteroids[i+1] * -1
                 asteroids[i] = asteroids[i] * -1
+        print(asteroids)
         for star in asteroids:
             cur_exist = True
             while stack and stack[-1] > 0 > star and cur_exist :
@@ -56,6 +60,7 @@ if __name__ == '__main__':
     case = [3,8,8,-8]
     sol = Solution()
     print(sol.asteroidCollisionDupChangeDirection(case))
-
+    # print(sol.asteroidCollisionDupChangeDirection(case))
+    # print(sol.starCollision(case))
 
 

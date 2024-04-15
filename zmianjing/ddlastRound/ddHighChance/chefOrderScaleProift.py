@@ -94,7 +94,6 @@ if __name__ == "__main__":
     profit = [10,40,20,40,50] # [24,66,99]
     sol = solution()
     print(sol.getMaxPorift(chefs, difficult, profit))
-    print(sol.getMaxPorif2(chefs,difficult,profit))
     print(sol.findTotalProfitNoSorting(chefs,difficult,profit))
 
 

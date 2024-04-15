@@ -17,6 +17,7 @@ active time = total time-idle time = 355-70 = 285 mins;
 '''
 
 from datetime import datetime
+import bisect
 
 def time_to_minutes(time_str):
     time_obj = datetime.strptime(time_str, "%I:%M %p")

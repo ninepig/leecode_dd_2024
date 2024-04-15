@@ -34,6 +34,8 @@ List of pairs `[row, col]` for locations:
 
 Your task is to return the distance for each location from the closest DashMart.
 '''
+import collections
+
 '''
 不出意外 题目里应该会说 location 数组 会很大。 所以从d出发是最合适的
 '''
@@ -48,7 +50,7 @@ class solution:
 
         ## record  distance from each D , which starting from D
         distance_dict = dict()
-        queue = []
+        queue = collections.deque()
         rows = len(grid)
         cols = len(grid[0])
         dirs = [(-1,0),(1,0),(0,1),(0,-1)]
@@ -61,7 +63,7 @@ class solution:
                     distance_dict[(i,j)] = 0 ## put dashmart's pos in map also
 
         while queue:
-            cur_pos = queue.pop()
+            cur_pos = queue.popleft()
             cur_x , cur_y, cur_dis = cur_pos[0],cur_pos[1],cur_pos[2]
             for dir in dirs:
                 new_x = cur_x + dir[0]
@@ -88,7 +90,7 @@ class solution:
 
         ## record  distance from each D , which starting from D
         store_customer_dict = dict()
-        queue = []
+        queue = collections.deque()
         rows = len(grid)
         cols = len(grid[0])
         visited = set()
@@ -104,7 +106,7 @@ class solution:
                     store_found = False
                     queue.append((i,j))
                     while queue:
-                        current_pos = queue.pop()
+                        current_pos = queue.popleft()
                         current_x , current_y = current_pos[0],current_pos[1]
                         for dir in dirs:
                             new_x = current_x + dir[0]
@@ -119,7 +121,7 @@ class solution:
                                 if grid[new_x][new_y] == ' ' or grid[new_x][new_y] == 'C':
                                     visited.add((new_x,new_y))
                                     queue.append((new_x,new_y)) ## free road or customer , we can pass
-        print(store_customer_dict)
+        # print(store_customer_dict)
         max_value = max(store_customer_dict.values())
         res = []
         for item,value in store_customer_dict.items():

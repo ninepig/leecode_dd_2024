@@ -60,8 +60,46 @@ class solution:
 
         return max_value
 
+    def longestPathWithSameValue2(self,grid:list[list[int]]):
+        # use dfs to handle this question
+        # since we have difference value, so can not levage it self to do memo work
+        if not grid or len(grid) == 0:
+            return 0
+        max_value = -math.inf
+        rows = len(grid)
+        cols = len(grid[0])
+        visited = [[False for _ in range(cols)] for _ in range(rows)]
+        dirs = [[1,0],[-1,0],[0,1],[0,-1]]
+        def dfs(row,col):
+            if visited[row][col]:
+                return 0
 
+            visited[row][col] = True
+            cur_length = 1
+            for dir in dirs:
+                new_row = row + dir[0]
+                new_col = col + dir[1]
+                if 0 <= new_row < rows and 0 <= new_col < cols and grid[new_row][new_col] == grid[row][col]:
+                    ## + 1 代表我们每次+1 进入下一格
+                    ## 做对了！ 牛逼
+                    cur_length = max(cur_length,dfs(new_row,new_col) + 1)
 
-nums = [[7,5,6,6,6,6],[7,7,4,6,6,6],[7,7,1,2,3,6],[7,1,7,7,3,2],[7,7,7,7,7,1],[1,1,1,1,1,1]]
+            visited[row][col] = False ## need backtrack , so we can move up then move down 和 329相比这个就是不一样的了 329不需要backtrack
+
+            return cur_length
+
+        for i in range(rows):
+            for j in range(cols):
+                max_value = max(max_value,dfs(i,j))
+
+        return max_value
+
+nums = [[7,5,6,6,6,6],
+        [7,7,4,6,6,6],
+        [7,7,1,2,3,6],
+        [7,1,7,7,3,2],
+        [7,7,7,7,7,1],
+        [1,1,1,1,1,1]]
 sol = solution()
 print(sol.longestPathWithSameValue(nums))
+print(sol.longestPathWithSameValue2(nums))

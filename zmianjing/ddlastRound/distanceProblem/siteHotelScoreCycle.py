@@ -8,32 +8,35 @@ import collections
 
 class Solution:
     ## wrost case , node^maxTime--> brutal force way
-    def maximalPathQuality(self, values: list[int], paths: list[list[int]], maxTime: int) -> int:
-        ## maintain a graph, node's content is target node with consuming time
-        graph = collections.defaultdict(set)
-        for path in paths:
-            u,v,t = path[0],path[1],path[2]
-            graph[u].add((v,t))
-            graph[v].add((u,t))
+    def maximalPathQuality(self, values: list[int], edges: list[list[int]], maxTime: int) -> int:
+        d = collections.defaultdict(list)
+        n = len(values)
 
-        result = 0
-        visited = collections.defaultdict(int)
+        for edge in edges:
+            d[edge[0]].append([edge[1], edge[2]])
+            d[edge[1]].append([edge[0], edge[2]])
 
-        def dfs(u,maxTime,points):
-            if u == 0:
-                nonlocal result
-                result = max(points,result)
+        visited = [0] * n
+        ans = 0
 
-            visited[u] += 1 ## visited this point
+        def dfs(node, curTime, total):
+            nonlocal ans
+            if curTime > maxTime:
+                return
 
-            for v,t in graph[u]:
-                if maxTime - t >= 0:
-                    ## we can dfs to search
-                    dfs(v,maxTime - t , points + values[v] if v not in visited else 0) ## we only add point if we never vist that
-            visited[u] -= 1 ## backtrack
-            if visited[u] == 0:
-                del visited[u]
+            if visited[node] == 0:
+                total += values[node]
 
-        dfs(0,maxTime,values[0])
+            if node == 0:
+                if total > ans:
+                    ans = total
 
-        return result
+            visited[node] += 1
+
+            for vertex, time in d[node]:
+                dfs(vertex, curTime + time, total)
+
+            visited[node] -= 1
+
+        dfs(0, 0, 0)
+        return ans

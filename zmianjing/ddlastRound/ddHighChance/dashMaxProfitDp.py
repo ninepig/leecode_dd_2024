@@ -225,7 +225,7 @@ d_pays   = [10,5, 2, 4, 1]
 
 test = Solution()
 print(test.jobMaxProfit(d_starts,d_ends,d_pays,start_time,end_time))
-# print(test.jobMaxProfitDp(d_starts,d_ends,d_pays,start_time,end_time))
-print(test.jobMaxProfitPrintOrder(d_starts,d_ends,d_pays,start_time,end_time))
-print(test.jobMaxProfitDpPrintOrder(d_starts,d_ends,d_pays,start_time,end_time))
+print(test.jobMaxProfitDp(d_starts,d_ends,d_pays,start_time,end_time))
+# print(test.jobMaxProfitPrintOrder(d_starts,d_ends,d_pays,start_time,end_time))
+# print(test.jobMaxProfitDpPrintOrder(d_starts,d_ends,d_pays,start_time,end_time))
 print(test.jobMaxProfitDpMul(d_starts,d_ends,d_pays,start_time,end_time,3))

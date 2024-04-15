@@ -18,10 +18,6 @@ https://www.1point3acres.com/bbs/thread-940762-1-1.html
 Follow Up是如果可以连着走多家店怎么改，只要改一下更新choosingWalking的逻辑就行。
 后面给主动提了个followup，如果可以选择开回道路入口处离开，怎么改，思路大概就是DrivingTime不再fix，和最后的停车点相关。
 '''
-restaurant = [0, 3, 5, 10, 15]
-parkingTime = [3, 3, 4, 5, 1]
-WalkingSpeed = 1
-DrivingSpeed = 2
 
 def pickingUpTime(restaurant, parkingTime, WalkingSpeed, DrivingSpeed):
     '''
@@ -42,8 +38,7 @@ def pickingUpTime(restaurant, parkingTime, WalkingSpeed, DrivingSpeed):
         chooseDriving, chooseWalking= min(chooseDriving,chooseWalking) + parkingTime[i], chooseDriving + walking_time
         ## Follow Up是如果可以连着走多家店怎么改，只要改一下更新choosingWalking的逻辑就行。
         # 因为你可以连续走。所以选开车或者走路最省时间的就可以了， 对于每家店的walkingtime 固定的。
-        #chooseDriving, chooseWalking = min(chooseDriving, chooseWalking) + parkingTime[i], min(chooseDriving, chooseWalking) + walking_time
-
+        # chooseDriving, chooseWalking = min(chooseDriving, chooseWalking) + parkingTime[i], min(chooseDriving, chooseWalking) + walking_time
     return min(chooseWalking,chooseDriving) + drive_time
 
 

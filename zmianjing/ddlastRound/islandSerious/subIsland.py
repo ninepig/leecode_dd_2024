@@ -106,7 +106,7 @@ class Solution:
             for j in range(cols):
                 if grid2[i][j] == 1 and grid[i][j] == 0:
                     dfs(i, j)
-
+                    # grid_parent_temp = copy.deepcopy(grid)
         ## step2
         count = 0
         for i in range(rows):
@@ -114,8 +114,12 @@ class Solution:
                 if grid2[i][j] == 1:
                     ## using a deep copy to get a new grid so it won't affect next round
                     grid_parent_temp = copy.deepcopy(grid)
+                    # print(grid)
+                    # print(grid2)
                     size_parent = dfsGetSize(i,j,grid_parent_temp)
+                    # print("parent" + str(size_parent))
                     size_current = dfsGetSize(i,j,grid2)
+                    # print("current" + str(size_current))
                     # FollowUp: Count Sub Islands that are 40% a subset of the other grid
                     ## if we use this way, parent could already be moved, so we should do a
                     if size_current / size_parent * 100 >= 40.0:
@@ -202,10 +206,18 @@ class Solution:
 grid1 =[[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]]
 grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]
 
-grid3 =[[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]]
-grid4 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]
+grid3 =[[1,1,1,0,0],
+        [0,1,1,1,1],
+        [0,0,0,0,0],
+        [1,0,0,0,0],
+        [1,1,0,1,1]]
+grid4 = [[1,1,1,0,0],
+         [0,0,1,1,1],
+         [0,1,0,0,0],
+         [1,0,1,1,0],
+         [0,1,0,1,0]]
 
 test = Solution()
 # print(test.countSubIslands(grid1,grid2))
-# print(test.countSubIslands(grid1,grid2))
+print(test.countSubIslandsSize(grid3,grid4))
 print(test.countSubIslandsSizeParentSize(grid3,grid4))

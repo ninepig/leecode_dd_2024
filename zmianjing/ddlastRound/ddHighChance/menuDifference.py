@@ -98,6 +98,3 @@ class solution:
             count += self.countTree(child)
 
         return count
-
-    def countMenuNode(self,menu_node:menuNode):
-        pass

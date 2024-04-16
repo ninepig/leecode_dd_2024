@@ -11,6 +11,7 @@ class Solution:
     # 字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格。 整数除法仅保留整数部分
     def calculate2(self, s: str) -> int:
         sign = '+'
+        s += "+" ## adding dummy node to finish last opertaion
         stack = []
         cur_num = 0
 
@@ -34,7 +35,7 @@ class Solution:
                 #after process
                 cur_num = 0
                 sign = c # assign new value to sign
-        return sum(stack)
+        return sum(stack) + cur_num
 
     ## 括号 + 正负符号
     # 正负符号, 计算

@@ -64,7 +64,7 @@ class solution:
             size = int(nodes.pop(0))
             node.children= []
             for i in range(size):
-                node.children.append(self.buildString())
+                node.children.append(self.buildTree(nodes))
 
             return node
 

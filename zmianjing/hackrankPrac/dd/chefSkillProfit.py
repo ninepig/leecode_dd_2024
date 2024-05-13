@@ -4,11 +4,9 @@ class Solution:
         if not dish or not profit or not chef:
             raise Exception("wrong input")
             ##... length .. .size... skip for saving time
-
         '''
         profit not liner like dish's difficlut
         '''
-
         ## sort by dish' difficult
         ## nlogn for sorting
         dish_profit_sorted = sorted(zip(dish, profit), key=lambda x: x[0])
@@ -53,7 +51,6 @@ class Solution:
             res += skill_profit[item]
 
         return res
-
 
 chefs = [5, 4, 3, 7]  ## [40,25,25]
 difficult = [2, 4, 6, 8, 10]  # [85,47,57]

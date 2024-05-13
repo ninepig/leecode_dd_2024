@@ -29,8 +29,7 @@ class solution:
         for i in range(1, n + 1):
             cur = i
             for j in range(i - 1, -1, -1):
-                if valid_order[j][1] <= valid_order[i][
-                    0]:  ## we try to first end time which  smaller than i's start time
+                if valid_order[j][1] <= valid_order[i][0]:  ## we try to first end time which  smaller than i's start time
                     cur = j
                     break
             dp[i] = max(dp[i - 1], dp[j] + valid_order[i][2])

@@ -1,3 +1,7 @@
+## followup 不存在dp每个节点里的方法
+## https://takeuforward.org/data-structure/print-longest-common-subsequence-dp-26/
+## https://www.geeksforgeeks.org/printing-longest-common-subsequence/
+
 class Solution:
     def longestCommonOrderPath(self, res1, res2):
         ## sanitty check

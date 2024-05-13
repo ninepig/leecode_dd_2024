@@ -56,13 +56,18 @@ class Solution:
             lst.append((end, -n))
         lst.sort()
         pas = 0
+        max_value = 0
         for loc in lst:
             pas += loc[1]
+            max_value = max(pas,max_value)
             if pas > capacity:
-                return False
+                print("break")
+                # return False
+        print(max_value)
         return True
 #
 test = [[2,1,5],[3,3,7]]
 sol = Solution()
 print(sol.carPooling(test,5))
 print(sol.carPoolingMax(test))
+print(sol.carPoolingSortingWay(test,5))

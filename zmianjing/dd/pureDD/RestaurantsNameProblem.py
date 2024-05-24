@@ -23,8 +23,6 @@ Output:
 # 第一题是 1790 , 用map的方法做 最暴力,
 import collections
 
-from LinkedList import List
-
 
 class solution:
     def findSimilarRestaunt(self,orignal:str,targets):

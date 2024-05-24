@@ -1,8 +1,4 @@
-from collections import defaultdict
-import random
 from collections import namedtuple
-
-from LinkedList import List
 
 '''
 Nearest Neighbour City

@@ -3,7 +3,7 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-from LinkedList.List import ListNode
+from firstRount.LinkedList.List import ListNode
 
 
 class Solution:

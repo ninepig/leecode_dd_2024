@@ -1,7 +1,7 @@
 import heapq
 
-from LinkedList import List
-from LinkedList.List import ListNode
+from firstRount.LinkedList import List
+from firstRount.LinkedList.List import ListNode
 
 
 class Solution:

@@ -2,8 +2,6 @@ import heapq
 
 from sortedcontainers import SortedList
 
-from LinkedList import List
-
 
 class Solution:
     # o(n*k) 时间复杂度

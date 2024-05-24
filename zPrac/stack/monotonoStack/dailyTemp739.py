@@ -1,4 +1,4 @@
-from LinkedList import List
+from firstRount.LinkedList import List
 
 
 class Solution:

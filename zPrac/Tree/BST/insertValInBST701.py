@@ -1,4 +1,4 @@
-from Tree.TreeBasic.TreeNode import TreeNode
+from firstRount.Tree.TreeBasic.TreeNode import TreeNode
 
 
 class Solution:

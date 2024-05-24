@@ -4,7 +4,7 @@ https://www.1point3acres.com/bbs/thread-1054159-1-1.html
 '''
 import collections
 
-from LinkedList import List
+from firstRount.LinkedList import List
 
 
 class Solution:

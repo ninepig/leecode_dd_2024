@@ -43,6 +43,10 @@ input: [5,3,8,3,2,5]
 seen from left[2, 1, 2, 2, 1, 0]
 seen from right [0, 1, 2, 1, 1, 3]
 Output: [3,3,5,4,4,4]
+
+
+https://leetcode.com/problems/number-of-visible-people-in-a-queue/
+1944的复杂版
 '''
 from typing import List
 

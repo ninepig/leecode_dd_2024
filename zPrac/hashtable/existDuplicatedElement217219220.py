@@ -19,7 +19,7 @@ class Solution:
     给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个 不同的索引 i 和 j ，满足 nums[i] == nums[j] 且 abs(i - j) <= k 。
     如果存在，返回 true ；否则，返回 false 
     '''
-    # hashmap store num:index pairs
+    # complexDs store num:index pairs
     '''
     维护一个最多有 k 个元素的哈希表。遍历 nums，对于数组中的每个整数 nums[i]，判断哈希表中是否存在这个整数。
 

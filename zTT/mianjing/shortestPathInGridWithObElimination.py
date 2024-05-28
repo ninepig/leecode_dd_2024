@@ -1,3 +1,6 @@
+import collections
+
+
 class Solution:
     ## 这个bfs + 多维度 非常好玩
     '''

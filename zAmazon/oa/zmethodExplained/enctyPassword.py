@@ -81,7 +81,7 @@ def getPassword(password:str)->str:
                 freq[char] -= 2
                 l += 1
                 r -= 1
-            # Clear this from hashmap
+            # Clear this from complexDs
             if freq[char] == 0:
                 del freq[char]
             if freq[char] == 1:

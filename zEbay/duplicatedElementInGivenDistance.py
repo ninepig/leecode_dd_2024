@@ -5,7 +5,7 @@ class solution:
     ## Write a function to determine whether duplicate elements in a given array are within a given distance of each other
     def checkDuplicated(self,nums:list[int],dis:int):
         '''
-        hashmap -->value to indx , check if we see any elment with dis
+        complexDs -->value to indx , check if we see any elment with dis
         '''
         if not nums or len(nums) == 0: return False
         help_dict = dict()

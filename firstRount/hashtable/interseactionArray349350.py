@@ -11,7 +11,7 @@ class Solution:
 
         return set(res)
 
-    '''hashmap with counting'''
+    '''complexDs with counting'''
     def intersectionWithMap(self, nums1: List[int], nums2: List[int]) -> List[int]:
         htable= dict()
         res = []

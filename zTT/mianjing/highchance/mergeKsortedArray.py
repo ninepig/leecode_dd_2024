@@ -1,5 +1,8 @@
 import heapq
 from heapq import heapify
+from typing import List, Optional
+
+
 ## 数据安全
 ##  coding都是简单题：第一题是两个数组a, b, 找到满足满足a[i] -b[j] = a[j] -b[i] 条件的i和j。第二题是merge k sorted array
 ##

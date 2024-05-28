@@ -5,12 +5,15 @@ from typing import List
 
 class Solution:
     def minJumps(self, arr: List[int]) -> int:
+        ##同value的list ，便于后面跳
         idxSameValue = defaultdict(list)
         for i, a in enumerate(arr):
             idxSameValue[a].append(i)
         visitedIndex = set()
         q = deque()
+        ##从 0 开始跳
         q.append([0, 0])
+        ## vistied 数组
         visitedIndex.add(0)
         while q:
             idx, step = q.popleft()
@@ -21,6 +24,7 @@ class Solution:
             for i in idxSameValue[v]:
                 if i not in visitedIndex:
                     visitedIndex.add(i)
+                    ## same value's index, so you can jumpto
                     q.append([i, step])
             del idxSameValue[v]
             if idx + 1 < len(arr) and (idx + 1) not in visitedIndex:

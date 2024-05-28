@@ -1,5 +1,5 @@
 class Solution:
-    # hashmap ---> 去重
+    # complexDs ---> 去重
     # 顺序输出 + 最小--> 单调栈
     def removeDuplicateLetters(self, s: str) -> str:
         stack = []

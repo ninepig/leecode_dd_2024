@@ -1,6 +1,9 @@
 '''
 从0出发 到各个点
 '''
+import collections
+from typing import List
+
 
 class Solution:
     def updateMatrix(self, matrix: List[List[int]]) -> List[List[int]]:

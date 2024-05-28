@@ -15,7 +15,7 @@ class Solution:
         better way
         since we want smaller value , we can use priroty queue to avoid loop again
         if we use pq, we need a btter way to record pop item
-        we can use hashmap to record node's left/right neightbour
+        we can use complexDs to record node's left/right neightbour
         when we pop item , we can have record of it's left,right item
         then we check node's left right to see if we need push to queue again
 

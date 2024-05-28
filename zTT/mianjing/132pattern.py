@@ -1,30 +1,17 @@
 import math
 from typing import List
 
-
-class Solution(object):
-    def find132pattern(self, nums):
-        N = len(nums)
-        numsi = nums[0]
-        for j in range(1, N):
-            for k in range(N - 1, j, -1):
-                if numsi < nums[k] and nums[k] < nums[j]:
-                    return True
-            numsi = min(numsi, nums[j])
-        return False
-
-# 作者：负雪明烛
-# 链接：https://leetcode.cn/problems/132-pattern/solutions/676741/fu-xue-ming-zhu-cong-bao-li-qiu-jie-dao-eg78f/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
 class Solution:
     def find132pattern(self, nums: List[int]) -> bool:
         stack = []
+        # k present 2 in 132 pattern
         k = -math.inf
+        ## loop from back , num[i] represet 1 in pattern
+        ## using a monotonic queue, if queue is not empty, which means, top of queue is 3 ,
         for i in range(len(nums) - 1,-1,-1):
             if nums[i] < k:
                 return True
+            ## we found a value bigger than top of stack, which means, we must have a 3 bigger than 2
             while stack and stack[-1] < nums[i]:
                 k = max(k,stack.pop())
             stack.append(nums[i])

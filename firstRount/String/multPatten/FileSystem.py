@@ -56,8 +56,6 @@ class FileSystem:
         node = self.root.search(filePath)
         return ''.join(node.content)
 
-
-
 obj = FileSystem()
 path = "/wenjing/fff"
 filePath = "/wenjing/abc"

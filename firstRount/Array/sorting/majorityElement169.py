@@ -8,7 +8,7 @@
 sort， 取中间值， 因为是大部分。 所以必须是在中间的那个数
 
 思路2
-hashmap， 取hashmap值最大的
+complexDs， 取hashmap值最大的
 
 思路3
 新算法Moore Voting Algorithm

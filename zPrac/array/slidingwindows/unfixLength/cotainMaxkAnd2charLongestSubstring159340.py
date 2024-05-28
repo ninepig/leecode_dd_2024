@@ -16,7 +16,7 @@ class Solution:
         while right < len(s):
             right_char = s[right]
             if windwos[right_char] == 0:
-                count += 1 # only we dont have right char in hashmap, we add 1
+                count += 1 # only we dont have right char in complexDs, we add 1
             windwos[right_char] += 1
 
             while count > 2 :

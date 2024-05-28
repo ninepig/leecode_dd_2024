@@ -1,4 +1,4 @@
-'''经典数学题 + hashmap
+'''经典数学题 + complexDs
 x---》y z 点的距离存入hashmap之中
 关键是ans的计算'''
 class Solution:

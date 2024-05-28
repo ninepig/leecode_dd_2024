@@ -4,21 +4,6 @@ class TreeNode:
         self.left = None
         self.right = None
 
-    def maxPathSumAnyNode(self, root: TreeNode) -> float:
-        if not root: return 0
-        self.max = -math.inf
-        def dfs(node:TreeNode):
-           if not node: # if node not exist, return -inf
-               return  0
-           left_pathsum = dfs(node.left)
-           right_pathsum = dfs(node.right)
-           left_maxsum = max(left_pathsum,0)
-           right_maxsum = max(right_pathsum,0)
-           self.max = max(self.max, left_maxsum + right_maxsum + node.val) ## we update max value if we choose current node
-           return max((left_maxsum + node.val),(right_maxsum + node.val)) ## since that is anynode, so we can choose left max or right max
-
-        dfs(root)
-        return self.max
 def max_leaf_to_leaf(root):
     if not root:
         return 0

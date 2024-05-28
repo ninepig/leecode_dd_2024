@@ -39,7 +39,7 @@ Interviwer was looking for O(n) solution.
 
 ## 这个题非常难。。
 扫描过去，如果有多个 local peak， pop smaller id。。 这个也就是我们每次扫描都需要有个排序来满足
-1 pq + hashmap
+1 pq + complexDs
  1.1 pq 记录每次符合条件的local peak ---》 每次pop小的
  1.2 pop之后，利用hashmap 把popout的 左右两侧neighbour 联系在一起（类似 dqueue）， 然后再扫描， 丢入pq
  ---》 n logn 的时间复杂度
@@ -52,7 +52,7 @@ from heapq import *
 def process(orders: [int]):
     ## dummy node for better process
     orders = [float('-inf')] + orders + [float('-inf')]
-    # min heap + hashmap approach, keep neighbor info in hashmap
+    # min heap + complexDs approach, keep neighbor info in complexDs
 
     def is_eligible(order_id):
         left, right = neighbors[order_id]

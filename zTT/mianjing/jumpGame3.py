@@ -11,6 +11,8 @@ https://leetcode.cn/problems/jump-game-iii/solutions/101796/tiao-yue-you-xi-iii-
 分析题目 找到合适的算法。 模板
 这个就是个经典的bfs 模板。
 '''
+import collections
+from typing import List
 
 
 class Solution:
@@ -21,7 +23,7 @@ class Solution:
         n = len(arr)
         used = {start}
         q = collections.deque([start])
-
+        ## bfs,不断搜索， 如果我们可以达到0 ，只能2种跳法
         while len(q) > 0:
             u = q.popleft()
             for v in [u + arr[u], u - arr[u]]:
@@ -32,5 +34,3 @@ class Solution:
                     used.add(v)
 
         return False
-
-、

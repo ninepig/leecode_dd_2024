@@ -2,10 +2,12 @@
 https://www.1point3acres.com/bbs/thread-1063465-1-1.html
 不知道什么组
 '''
+from itertools import pairwise
+
+
 class Solution:
     def findMissingRanges(
-        self, nums: List[int], lower: int, upper: int
-    ) -> List[List[int]]:
+        self, nums: List[int], lower: int, upper: int) -> List[List[int]]:
         n = len(nums)
         if n == 0:
             return [[lower, upper]]

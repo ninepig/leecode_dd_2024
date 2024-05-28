@@ -1,7 +1,7 @@
 '''
 这道题经常见
 是leetcode 加强版 增加了delete的api
-1 hashmap
+1 complexDs
 2 trie
 todo do more test case
 '''

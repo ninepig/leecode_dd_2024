@@ -58,7 +58,7 @@ def maxProduct(arr, n):
 		# result.
 		elif(smaller[i] != -1):
 			result = max(smaller[i] * arr[i] *
-						max_right, result)
+						max_right,  )
 		if(i == n - 3):
 			result *= 100
 		i -= 1

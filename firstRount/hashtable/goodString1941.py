@@ -5,7 +5,7 @@ class Solution:
         for c in str:
             counter[c] = counter.getDefault(c,0) + 1
         flag = -1
-        # python hashmap 的loop 是value ，然后需要自己取值
+        # python complexDs 的loop 是value ，然后需要自己取值
         for key in counter:
             if flag == -1 :
                 flag = counter[key]

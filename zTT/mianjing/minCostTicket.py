@@ -18,7 +18,6 @@ which simply means we don't have to spend money, and total costs remains same
 '''
 from typing import List
 
-
 def mincostTickets(self, days: List[int], costs: List[int]) -> int:
 	dp=[0 for i in range(days[-1]+1)]
 	dy = set(days)

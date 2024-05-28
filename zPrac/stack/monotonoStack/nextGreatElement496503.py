@@ -10,7 +10,7 @@ class Solution:
                 stack.pop()
             stack.append(num)
 
-        # find number in hashmap
+        # find number in complexDs
         for num in nums1:
             res.append(hashmap.get(num,-1))
 

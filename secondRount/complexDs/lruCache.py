@@ -6,6 +6,10 @@ LRU的逻辑
 3 每次get元素，都要把元素插在头部后面，同时删除原来的位置
 
 这个算是简单数据结构的复杂应用。只能说多练习多练习多练习
+
+lfu
+https://www.cnblogs.com/labuladong/p/13975044.html
+https://leetcode.com/problems/lfu-cache/solutions/800188/python-o-1-using-dll-and-dictionary/
 '''
 
 class double_linked_list:

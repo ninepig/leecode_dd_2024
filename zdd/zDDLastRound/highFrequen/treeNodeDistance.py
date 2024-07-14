@@ -52,6 +52,7 @@ class Solution:
         def dfs(node):
             nonlocal max_sum,max_sum_path
             if not node:
+
                 return 0,[]
 
             left, left_path = dfs(node.left)
@@ -196,7 +197,6 @@ print("Path:", max_path)
 
 max_sum = sol.maxPathBewtweenAnyLeafNodeWithoutTag(root)
 print("Maximum path sum between two leaf nodes:", max_sum)
-
 
 root = Node(-15)
 root.left = Node(5)

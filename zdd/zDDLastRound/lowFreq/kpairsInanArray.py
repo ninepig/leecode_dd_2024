@@ -5,7 +5,9 @@
 那只要记录有多少数相等即可。 因为是unique pair
 '''
 import collections
-
+'''
+这个题也比较简单
+'''
 
 class Solution:
     def findPairs(self, nums: list[int], k: int) -> int:

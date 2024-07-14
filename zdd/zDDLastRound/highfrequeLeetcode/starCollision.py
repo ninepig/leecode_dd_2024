@@ -51,6 +51,6 @@ class Solution:
 
 case = [3,8,8,-8]
 sol = Solution()
-print(sol.starCollision(case))
+# print(sol.starCollision(case))
 # print(sol.starCollision2(case))
 

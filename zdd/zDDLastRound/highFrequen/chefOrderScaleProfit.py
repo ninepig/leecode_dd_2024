@@ -26,7 +26,7 @@ check max value chef can reach
 
 
 ## nlogn
-def getMaxPorift(self, chefs: list[int], orderScale: list[int], orderProfit: list[int]) -> int:
+def getMaxPorift(chefs: list[int], orderScale: list[int], orderProfit: list[int]) -> int:
     if not chefs or not orderScale or not orderProfit:
         return 0
     scale_profit = sorted(zip(orderScale,orderProfit),key=lambda x:x[0])
@@ -43,7 +43,8 @@ def getMaxPorift(self, chefs: list[int], orderScale: list[int], orderProfit: lis
 
     return res
 
-def getMaxPoriftMN(self, chefs: list[int], orderScale: list[int], orderProfit: list[int]) -> int:
+#o(n)
+def getMaxPoriftMN(chefs: list[int], orderScale: list[int], orderProfit: list[int]) -> int:
     if not chefs or not orderScale or not orderProfit:
         return 0
     '''
@@ -81,3 +82,11 @@ def getMaxPoriftMN(self, chefs: list[int], orderScale: list[int], orderProfit: l
         total_profit += skill_profit_all_Bucket[chef]
 
     return total_profit
+
+
+
+chefs = [5,4,3,7] ## [40,25,25]
+difficult = [2,4,6,8,10] # [85,47,57]
+profit = [10,40,20,40,50] # [24,66,99]
+print(getMaxPorift(chefs, difficult, profit))
+print(getMaxPoriftMN(chefs,difficult,profit))

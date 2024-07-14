@@ -12,15 +12,6 @@ from typing import List
 
 
 class SolutionStock1:
-    def maxProfitBF(self, prices: List[int]) -> int:
-        res = 0
-        size = len(prices)
-        for i in range(size):
-            for j in range(i + 1 ,size):
-                if prices[j] > prices[i]:
-                    res = max(res, prices[j] - prices[i])
-
-        return res
 
     ''' 
     只能和后面的比， 所以我们可以每次都找新的低点 然后和后面的比
@@ -45,17 +36,6 @@ class SolutionStock1:
 这个题只要有利润就搞
 '''
 class SolutionStock2:
-    def maxProfit(self, prices: List[int]) -> int:
-        res = 0
-        size = len(prices)
-        for i in range(size):
-            for j in range(1,size):
-                if prices[j] > prices[i]:
-                    res += prices[j] - prices[i]
-                    i = i+1 #这个在python里没法用 所以不能用这种loop
-                    break
-                    # 完成一笔i就用掉了
-        return res
 
     def maxProfit(self, prices: List[int]) -> int:
         res = 0
@@ -109,7 +89,7 @@ class SolutionStock4:
 
 
 ## 卖出以后要冷冻一天 ，所以你买入必须是上次卖出后的2天
-class SolutionStockWithFree:
+class SolutionStockWithCoolDown:
     def maxProfit(self, k:int, prices: List[int]) -> int:
         size = len(prices)
         dp = [[0,0] for _ in range(size)]

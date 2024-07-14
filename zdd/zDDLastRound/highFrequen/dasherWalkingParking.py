@@ -16,8 +16,7 @@ Follow Up是如果可以连着走多家店怎么改，只要改一下更新choos
 后面给主动提了个followup，如果可以选择开回道路入口处离开，怎么改，思路大概就是DrivingTime不再fix，和最后的停车点相关。
 '''
 import math
-
-
+# o(n) for greedy
 def pickingUpTime(restaurant, parkingTime, WalkingSpeed, DrivingSpeed):
     ## Driving time is fixed
     ## for each stop, if we parkhere in n -1, we can choose walk or dirve to next

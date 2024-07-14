@@ -1,77 +1,66 @@
+import  collections
+
 class Solution:
     def exist(self, board: list[list[str]], word: str) -> bool:
-        dirs= [(-1,0),(1,0),(0,1),(0,-1)]
         rows = len(board)
         cols = len(board[0])
+        ##可以不用visit 用原grid + “.” 的方法  减少额外空间
+        visited = [[False for _ in range(cols)] for _ in range(rows)]
+        dirs = [(-1,0),(1,0),(0,1),(0,-1)]
         def dfs(row,col,index):
             if index == len(word):
-                ## reach end of word
                 return True
-
-            if not (0 <= row < rows and 0<= col < cols):
-                return False ## out of board
-
-            if word[index] != board[row][col]:
-                return False # not right word
-
-            temp = board[row][col]
-            board[row][col] = "" ## set visited
-            found = False
-            for dir in dirs:
-                new_row = row + dir[0]
-                new_col = col + dir[1]
-                found |= dfs(new_row,new_col,index + 1) ## any direction found target is fine.
-            board[row][col] = temp #back track
-            return found
+            if visited[row][col]:
+                return False
+            if board[row][col] == word[index]:
+                visited[row][col] = True
+                for dir in dirs:
+                    new_row = row + dir[0]
+                    new_col = col + dir[1]
+                    if 0 <= new_row < rows and 0 <= new_col < cols:
+                        if dfs(new_row,new_col,index + 1):
+                            return True
+                visited[row][col] = False
+            return False
 
         for i in range(rows):
             for j in range(cols):
                 if board[i][j] == word[0]:
                     if dfs(i,j,0):
                         return True
-
         return False
 
-import  collections
-class SolutionBFS:
-	def exist(self, board: list[list[str]], word: str) -> bool:
-		n, m = len(board), len(board[0])
-		adj = [(0,-1), (0,1), (1,0), (-1,0)]
+    def existBfs(self, board: list[list[str]], word: str) -> bool:
+        # 处理边界情况
+        if len(word) == 0 or not board or not board[0]:
+            return False
 
-		graph = collections.defaultdict(list)
-		letters = set()
-		for i in range(n):
-			for j in range(m):
-				letters.add(board[i][j])
-				for l, k in adj:
-					if 0 <= i + l < n and 0 <= j + k < m:
-						graph[(i,j)].append((i+l,j+k))
+        directs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        len_word, board_row, board_column = len(word), len(board), len(board[0])
 
-		for i in word:
-			if i not in letters: return False
+        queue = collections.deque()
+        # 任意一个元素都有可能是入口, 将其入队
+        for row in range(board_row):
+            for column in range(board_column):
+                if board[row][column] == word[0]:
+                    queue.append(((row, column), 0,[]))
 
-		def bfs(i,j):
-			w = board[i][j]
-			p = set()
-			p.add((i,j))
-			Q = collections.deque([(w, i, j, 0, p)])
-			while Q:
-				current, r, c, level, path = Q.popleft()
-				if current == word: return True
-				for l, k in graph[(r,c)]:
-					if board[l][k] == word[level+1]:
-						if (l,k) in path: continue
-						p = path.copy()
-						p.add((l,k))
-						Q.append( (current+board[l][k], l, k, level + 1, p) )
-			return False
+        while queue:
+            index_board, index_word, visited_index = queue.popleft()
+            # 如果board中的字符与word中的字符相同,则进行下一次比较, 否则不进行比较
+            if board[index_board[0]][index_board[1]] == word[index_word]:
+                # 如当前是word中的最后一个字符, 则说明前面的匹配成功
+                if index_word == len_word - 1:
+                    return True
+                # 检查相邻的元素
+                for direct in directs:
+                    # 获取新的下标
+                    new_row_index, new_column_index = index_board[0] + direct[0], index_board[1] + direct[1]
+                    # 如果当前索引符合规范(没有越界, 没有被访问过)
+                    if 0 <= new_row_index < board_row and 0 <= new_column_index < board_column and (new_row_index, new_column_index) not in visited_index:
+                        queue.append(((new_row_index, new_column_index), index_word + 1, visited_index + [index_board]))
+        return False
 
-		for i in range(n):
-			for j in range(m):
-				if word[0] == board[i][j]:
-					x = bfs(i,j)
-					if x: return x
-		return False
 
 class Solution2:
     def findWords(self, board: list[list[str]], words: list[str]) -> list[str]:

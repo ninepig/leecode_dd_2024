@@ -46,6 +46,7 @@ from heapq import heappush
 同时 dummy node的做法也很秒
 最终 heaq + hashmap + 特殊数据结构的做法 太牛逼
 
+遇到照抄
 '''
 
 def processWithDummy(orders: list[int]):

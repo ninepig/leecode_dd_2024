@@ -19,6 +19,7 @@
 '''
 
 ## 利用dp里记录数组来做
+
 def longestCommonPickUpOrder(s1,s2):
     if not s1 or not s2:
         return ""

@@ -171,7 +171,7 @@ at 6:55, dasher fulfilled the order B// total pay = add all above together'''
         return totalIncome
 
 ##todo follow up 2：input又多了一个2d string array，每一行‍‍是一个peak time的开始和结束，这期间dasher的收入翻倍
-    def dasherIncomeWithWaitingBetter(self, orders: list[OrderActivity], basePay: float,peakHour:list[list[int]]):
+    def dasherIncomeWithWaitingBetter2(self, orders: list[OrderActivity], basePay: float,peakHour:list[list[int]]):
         if not orders or len(orders) == 0 or not basePay:
             raise Exception("Wrong input")
         totalIncome = 0
@@ -231,24 +231,23 @@ at 6:55, dasher fulfilled the order B// total pay = add all above together'''
 
         return base_min + peak_min
 
-test = OrderActivity(6,15,"p",1,1)
-test2 = OrderActivity(6,30,"p",2,1)
-test3 = OrderActivity(6,35,"d",1,1)
-test4 = OrderActivity(6,40,"d",2,1)
-
-testArray = [test,test2,test3,test4]
+# test = OrderActivity(6,15,"p",1,1)
+# test2 = OrderActivity(6,30,"p",2,1)
+# test3 = OrderActivity(6,35,"d",1,1)
+# test4 = OrderActivity(6,40,"d",2,1)
+#
+# testArray = [test,test2,test3,test4]
 sol = Solution()
-# print(sol.dasherIncome(testArray,0.3))
 # print(sol.dasherIncomeConstantSpace(testArray,0.3))
 
-test = OrderActivity(6,15,"p",1,1)
-test2 = OrderActivity(6,30,"p",2,1)
-test7 = OrderActivity(6,50,"d",1,1)
-test8 = OrderActivity(6,55,"d",2,1)
-
-testArray3 = [test,test2,test7,test8]
-print(sol.dasherIncomeConstantSpace(testArray3,0.3))
-
+# test = OrderActivity(6,15,"p",1,1)
+# test2 = OrderActivity(6,30,"p",2,1)
+# test7 = OrderActivity(6,50,"d",1,1)
+# test8 = OrderActivity(6,55,"d",2,1)
+#
+# testArray3 = [test,test2,test7,test8]
+# print(sol.dasherIncomeConstantSpace(testArray3,0.3))
+#
 test = OrderActivity(6,15,"p",1,1)
 test2 = OrderActivity(6,30,"p",2,1)
 test3 = OrderActivity(6,35,"a",1,1)
@@ -259,8 +258,8 @@ test7 = OrderActivity(6,50,"d",1,1)
 test8 = OrderActivity(6,55,"d",2,1)
 testArray2 = [test,test2,test3,test4,test5,test6,test7,test8]
 # testArray3 = [test,test2,test7,test8]
+# print(sol.dasherIncomeWithWaiting(testArray2,0.3))
 print(sol.dasherIncomeWithWaiting(testArray2,0.3))
-# print(sol.dasherIncomeWithWaitingBetter(testArray2,0.3))
 
 ##todo 测试 peak hour
 

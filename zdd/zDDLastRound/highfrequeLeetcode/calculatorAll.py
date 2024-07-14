@@ -3,7 +3,7 @@ sign用来保存在这个当前num 前面的运算符
 stack放运算符(一个栈) + 计算好的值(非常重要, 有括号的情况,需要把值入栈), 然后用一个外部元素维护最终结果
 比如 4 * 3 , 第一个sign是+ ,第二个sign是3 , stack之中保存的是+ 4 * 3, 我们需要出栈来获取符号,或者利用sign来获取这个符号
  '''
-
+import math
 
 
 class Solution:
@@ -11,6 +11,7 @@ class Solution:
     # 字符串表达式仅包含非负整数，+， - ，*，/ 四种运算符和空格。 整数除法仅保留整数部分
     def calculate2(self, s: str) -> int:
         sign = '+'
+        s += "+" ## 不能漏这一行。。漏了就报错，因为少了最后一个加 来处理最后一个操作
         stack = []
         cur_num = 0
 
@@ -30,10 +31,11 @@ class Solution:
                     stack.append(tmp*cur_num)
                 elif sign == '/':
                     tmp = stack.pop()
-                    stack.append(int(tmp/cur_num))
+                    stack.append(math.trunc(tmp/cur_num))
                 #after process
                 cur_num = 0
                 sign = c # assign new value to sign
+
         return sum(stack)
 
     ## 括号 + 正负符号
@@ -82,7 +84,7 @@ class Solution:
                     digit = 0
                     sign = 1 if s[i] == '+' else -1
                 elif s[i] == '(':
-                    subres, i = evaluate(i + 1)
+                    subres = evaluate(i + 1)
                     res += sign * subres
                 elif s[i] == ')':
                     res += digit * sign

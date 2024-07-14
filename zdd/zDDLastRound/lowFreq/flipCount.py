@@ -4,6 +4,8 @@
 然后数组就记录真实值和flip的区别，the real value at index i = （flip_count + value at index i ）% 2
 https://leetcode.com/problems/design-bitset/solutions/1748431/python3-java-c-all-operations-o-1-flipped-string-flip-flag/
 
+
+实际题目 如果有set  unset 也就是全部置1 or 0的操作 其实就不需要
 '''
 
 
@@ -34,6 +36,15 @@ class Bitset:
         else:
             if self.l[idx] == 1: self.ones -= 1
             self.l[idx] = 0
+
+    ## 其实 这两个不需要数组
+    def set(self) -> None:
+        self.flipp = False
+        self.ones = len(self.l)
+
+    def unset(self)-> None:
+        self.flipp = False
+        self.ones = 0
 
     def flip(self) -> None:
         self.flipp = not self.flipp

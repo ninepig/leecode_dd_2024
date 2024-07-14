@@ -7,8 +7,12 @@
 from typing import List
 import heapq
 
+'''
+很小概率。 感觉是ml 的池子
+'''
 
 class Solution:
+    # nlogn
     def getOrder(self, tasks: List[List[int]]) -> List[int]:
         tasks = [[duration, i, start] for i, (start, duration) in enumerate(tasks)]
         tasks.sort(key=lambda x: (x[2]))                # 按照开始时间将各个任务排序

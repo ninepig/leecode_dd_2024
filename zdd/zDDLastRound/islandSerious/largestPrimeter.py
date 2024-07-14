@@ -31,5 +31,4 @@ class solution:
                 if grid[rows][cols] == 1 : # start from any island
                     res = max(res,dfs(i,j))
                     ## if we only have 1 island break here
-
         return res

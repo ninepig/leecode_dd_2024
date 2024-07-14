@@ -3,6 +3,9 @@ class Solution:
     完全背包问题：
     需要确认是否可以重复使用同一个item
     还有这个题dd的tricky 是double的类型， 精度是2位
+
+    price double
+    budget double
     '''
     def getMaxCalories(self,prices:list,calories:list,budget):
         # sanity check
@@ -10,6 +13,7 @@ class Solution:
             return 0
 
         size = len(prices)
+        ## solving double problem
         prices_int = [item * 100 for item in prices]
         budget *= 100
         ## dp[i][j] means till ith item, jth budget, max calory we can get

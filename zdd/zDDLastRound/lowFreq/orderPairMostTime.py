@@ -34,8 +34,6 @@ class Solution:
                 item_tuple = tuple(item)
                 pair_order_dict[item_tuple] += 1
 
-        max_number = 0
-
         res = []
         most_number = max(pair_order_dict.values())
         for k, v in pair_order_dict.items():

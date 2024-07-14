@@ -33,10 +33,7 @@ In this case, the resulting array is ['YES', 'YES', 'NO', 'NO', 'YES', 'YES', 'Y
 1 构图
 2 bfs 找所有达到目标点
 3 然后不断更新最短路径
-
 '''
-
-
 def find_shortest_paths_2(node_g, src, dest, weight):
     graph = collections.defaultdict(list)
     for i in range(len(src)):
@@ -45,7 +42,6 @@ def find_shortest_paths_2(node_g, src, dest, weight):
         graph[d].append(i)
 
     print("graph",graph)
-
     ## queue  (city, cur_distance, visited)
     q = [(1, 0, set())]
     min_distance = float('inf')

@@ -24,6 +24,7 @@ class solution:
         new_tree_key_children_dict = {c.key:c for c in new_root.children}
         for old_child in old_root.children:
             ## compare any old child key in new children dict, if not exist, we pop None
+            ## 这一行 细品
             count += self.checkDifference(old_child,new_tree_key_children_dict.pop(old_child.key,None))
 
         ## 剩下的new child value

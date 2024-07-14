@@ -10,16 +10,16 @@ import collections
 ##--> max means most number of task
 ## --> tot means how many task is equal to max
 ## --> math.max(len(tasks), (max - 1)*(n + 1) + tot
-def leastInterval(self, tasks: list[str], n: int) -> int:
-    cnts = [0] * 26
-    for c in tasks:
-        cnts[ord(c) - ord('A')] += 1
-    maxv, tot = 0, 0
-    for i in range(26):
-        maxv = max(maxv, cnts[i])
-    for i in range(26):
-        tot += 1 if maxv == cnts[i] else 0
-    return max(len(tasks), (n + 1) * (maxv - 1) + tot)
+# def leastInterval(self, tasks: list[str], n: int) -> int:
+#     cnts = [0] * 26
+#     for c in tasks:
+#         cnts[ord(c) - ord('A')] += 1
+#     maxv, tot = 0, 0
+#     for i in range(26):
+#         maxv = max(maxv, cnts[i])
+#     for i in range(26):
+#         tot += 1 if maxv == cnts[i] else 0
+#     return max(len(tasks), (n + 1) * (maxv - 1) + tot)
 
 def leastDays(self, ads:list[str], coolDown:int) -> int:
     counter = collections.Counter(ads)
@@ -34,13 +34,10 @@ def leastDays(self, ads:list[str], coolDown:int) -> int:
 
 '''
 给你一个下标从 0 开始的正整数数组 tasks ，表示需要 按顺序 完成的任务，其中 tasks[i] 表示第 i 件任务的 类型 。
-
 同时给你一个正整数 space ，表示一个任务完成 后 ，另一个 相同 类型任务完成前需要间隔的 最少 天数。
-
 在所有任务完成前的每一天，你都必须进行以下两种操作中的一种：
 1 完成 tasks 中的下一个任务
 2 休息一天
-
 请你返回完成所有任务所需的 最少 天数。
 '''
 

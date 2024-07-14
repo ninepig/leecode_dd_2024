@@ -34,7 +34,10 @@ class solution:
             if arrays[j] > arrays[i - 1] : # find first number biggher than i
                 self.swap(arrays,i-1,j)
                 break
-        res = sum(d * 10 ** i for i, d in enumerate(arrays[::-1]))
+        ## easier way
+        target_str = ''.join(str(x) for x in arrays)
+        res = int(target_str)
+        # res = sum(d * 10 ** i for i, d in enumerate(arrays[::-1]))
         return res if res < 2 ** 31 else -1 #越界 很重要turn sum([d*10**i for d,i in enumerate(arrays[::-1])])
 
     def reverse(self,arrays,firstidx,lastidx):
@@ -80,7 +83,10 @@ class solution:
             if nums[j] < nums[idx]:
                 self.swap(nums,j,idx) # sawp 3 and 2
                 break
-        res = sum(d * 10 ** i for i, d in enumerate(nums[::-1]))
+        ## easier way
+        target_str = ''.join(str(x) for x in nums)
+        res = int(target_str)
+        # res = sum(d * 10 ** i for i, d in enumerate(nums[::-1]))
         return res * (-1) if res < 0 else res
 
 number = 13245

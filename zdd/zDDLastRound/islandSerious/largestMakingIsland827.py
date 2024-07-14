@@ -7,76 +7,60 @@ uf 的方法
 https://leetcode.cn/problems/making-a-large-island/solutions/1830996/by-ac_oier-1kmp
 
 '''
+from collections import defaultdict
 from typing import List
 
 
 class UnionFind:
-    def __init__(self,n):
-        # init forest
-        self.fa = [i for i in range(n)]
-        ## 增加了这个就能算出 uf之中count数
-        # self.count = n
-        self.size = [1 for _ in range(n)] # need a size map
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [1] * n
 
-    def find(self,x):
-        while self.fa[x] != x:
-            ## path compression, point to fa'fa in one loop, to reduce tree height
-            self.fa[x] = self.fa[self.fa[x]]
-            x = self.fa[x]
-        return x
+    def find(self, p):
+        if self.parent[p] != p:
+            self.parent[p] = self.find(self.parent[p])
+        return self.parent[p]
 
-    def union(self,x,y):
-        root_x = self.find(x)
-        root_y = self.find(y)
-        if root_y == root_x:
-            return False # they belong same union
-        if self.size[x] < self.size[y]:
-            self.union(y,x)
-        # connect
-        self.fa[root_x] = root_y
-        self.size[x] += self.size[y]
-        # self.count -= 1
+    def union(self, p, q):
+        prt, qrt = self.find(p), self.find(q)
+        if prt == qrt: return False
+        if self.rank[prt] > self.rank[qrt]: prt, qrt = qrt, prt
+        self.parent[prt] = qrt
+        self.rank[qrt] += self.rank[prt]
         return True
 
 
 class Solution:
     def largestIsland(self, grid: List[List[int]]) -> int:
-        rows = len(grid)
-        cols = len(grid[0])
+        n = len(grid)  # dimension
+        uf = UnionFind(n * n)
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j]:
+                    ##只考虑左侧或者上边的
+                    for (ii, jj) in (i - 1, j), (i, j - 1):
+                        if 0 <= ii < n and 0 <= jj < n and grid[ii][jj]: uf.union(i * n + j, ii * n + jj)
+
+        freq = defaultdict(int)
+        for i in range(n * n): freq[uf.find(i)] += 1
+
         ans = 0
-        uf = UnionFind(rows * cols + 10)
-        dirs = [(0,1),(0,-1),(1,0),(-1,0)]
-        for i in range(rows):
-            for j in range(cols):
-                if grid[i][j] == 0 :
-                    continue
-                for dir in dirs:
-                    new_i = i + dir[0]
-                    new_j = j + dir[1]
-                    if 0 <= new_i < rows and 0 <= new_j < cols and grid[new_i][new_j] == 1:
-                        ## uf to get all island connect and count the size
-                        uf.union(i*rows + j + 1, new_i * rows + new_j + 1)
-
-        for i in range(rows):
-            for j in range(cols):
-                if grid[i][j] == 1: ## dont need to flip
-                    ans = max(ans, uf.size[uf.find(i*rows +j + 1)]) # uf 找到这个点的在uf之中cluster的面积
-                if grid[i][j] == 0:
-                    cur = 1
-                    visited = set()
-                    for dir in dirs:
-                        new_i = i + dir[0]
-                        new_j = j + dir[1]
-                        if 0 <= new_i < rows and 0 <= new_j < cols and grid[new_i][new_j] == 1:
-                            root = uf.find(new_i * rows + new_j + 1)
-                            if root in visited:
-                                continue
-                            cur += uf.size[root]
-                            visited.add(root)
-                    ans = max(ans,cur)
-
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j]:
+                    ans = max(ans, freq[uf.find(i * n + j)])
+                else:
+                    cand = 1
+                    seen = set()
+                    for ii, jj in (i - 1, j), (i, j - 1), (i, j + 1), (i + 1, j):
+                        if 0 <= ii < n and 0 <= jj < n:
+                            if grid[ii][jj]:
+                                key = uf.find(ii * n + jj)
+                                if key not in seen:
+                                    seen.add(key)
+                                    cand += freq[key]
+                    ans = max(ans, cand)
         return ans
-
 
 '''
 dfs 版本
@@ -89,66 +73,63 @@ dfs 版本
 https://leetcode.cn/problems/making-a-large-island/solutions/790816/827zui-da-ren-gong-dao-python3-shi-yong-wwkd5
 '''
 class Solution2:
-    def largestIslandWenjing(self, grid: List[List[int]]) -> int:
-        ## cal all island area and store it
+    def largestIsland(self, grid):
+        if not grid or len(grid) == 0:
+            raise Exception("Wrong input")
         rows = len(grid)
         cols = len(grid[0])
-        idx_area_map = dict()
-        idx = 2 ## starting index, we will use this as flag for visited or not, 1 means island, 0 means water
-        dirs = [(1,0),(-1,0),(0,1),(0,-1)]
+        idx = 2  ## starting idx is 2
+        idx_size_dict = dict()
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-        def getArea(row,col,idx):
-            if not( 0<= row < rows and 0 <= col < cols):
+        ## get size of orignal grid and coloring grid with island idx
+        def getSize(row, col, idx):
+            if grid[row][col] == 0:
+                return 0  ## water
+            elif grid[row][col] != 1:  # vistied
                 return 0
-            if grid[row][col] != 1 : # not island
-                return 0
-            grid[row][col] = idx # dfs过程之中染色 外加计算面积
-            cur_area = 1
-            for dir in dirs:
-                new_x = dir[0] + row
-                new_y = dir[1] + col
-                cur_area += getArea(new_x,new_y,idx)
-            return cur_area
+            grid[row][col] = idx
+            size = 1
+            for dx, dy in dirs:
+                x = row + dx
+                y = col + dy
+                if 0 <= x < rows and 0 <= y < cols:
+                    size += getSize(x, y, idx)
+
+            return size
 
         for i in range(rows):
             for j in range(cols):
                 if grid[i][j] == 1:
-                    area = getArea(i,j,idx)
-                    idx_area_map[idx] = area
+                    size = getSize(i, j, idx)
+                    idx_size_dict[idx] = size
                     idx += 1
 
-        # after we have all island area size, we try to flip
-
-        if len(idx_area_map) == 0:
-            return 1 # no island
-        if max(idx_area_map.values()) == rows * cols:
-            return rows * cols ## only 1 island, no need to go further
-        ans = 0
+        # flip 0 to 1
+        max_size = 0
         for i in range(rows):
             for j in range(cols):
                 if grid[i][j] != 0:
-                    ans = max(ans,idx_area_map[grid[i][j]]) #
-                else:
-                    ## cal 4 surruranding island
-                    cur = 1
-                    neighbourisland_dict = dict()
-                    for dir in dirs:
-                        new_x = dir[0] + i
-                        new_y = dir[1] + j
-                        ## record 4 neighbour's size , and sum them
-                        if 0 <= new_x < rows and 0 <= new_y < cols:
-                            ## get idx by grid value
-                            new_idx = grid[new_x][new_y]
-                            neighbour_area = 0
-                            if new_idx in idx_area_map:
-                                neighbour_area = idx_area_map[new_idx]
-                            ## if new idx is not belong to any neighbour, we add one
-                            if new_idx not in neighbourisland_dict:
-                                neighbourisland_dict[new_idx] = neighbour_area
-                    cur += sum(neighbourisland_dict.values())
-                    ans = max(ans,cur)
+                    max_size = max(max_size, idx_size_dict[grid[i][j]])
+                elif grid[i][j] == 0:
+                    curSize = 1
+                    neigh_dict = dict()
+                    for dx, dy in dirs:
+                        x = i + dx
+                        y = j + dy
+                        if 0 <= x < rows and 0 <= y < cols:
+                            neigh_idx = grid[x][y]
+                            neigh_area = 0
+                            if neigh_idx in idx_size_dict:
+                                neigh_area = idx_size_dict[neigh_idx]
 
-        return ans
+                            if neigh_idx not in neigh_dict:
+                                neigh_dict[neigh_idx] = neigh_area
+
+                    curSize += sum(neigh_dict.values())
+                    max_size = max(max_size, curSize)
+
+        return max_size
 
 
 if __name__ == "__main__":

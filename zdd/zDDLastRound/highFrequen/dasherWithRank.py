@@ -54,6 +54,16 @@ part3
 part3是给dasher加了一个属性，骑车或者是开车，给订单加了一个属性，一个订单可以只允许骑车配送，只允许开车或者都允许，
 dasher只能看见自己能运的订单，并且对于次日订单，骑车的dasher下午16点就可以看到次日的bike订单，
 而开车的dasher19点才能看到那些同时允许开车和骑车的订单，修改part2的code
+
+https://www.1point3acres.com/bbs/thread-912260-1-1.html
+
+a. dasher有high/low rate，不同的rate可以看到的订单时间不一样。第一问就是通过rate列出dasher看到的所有订单。
+b. 在第一题基础上，restaurant会指定自己的dasher，给你一个restaurant数组，dasher object列出dasher看到的所有订单。
+c. 又多了一个条件：dasher可能会乘坐不同的交通工具(bike, car)，不同的饭店在不同的时间段可以接受不同的交通工具，这里还有个包含关系，
+比如能接受bike的也能接受car，反之则不行。
+给你dasher, restaurant array,
+time让你列出dasher看到的所有订单。
+
 '''
 import collections
 from datetime import datetime
@@ -96,7 +106,7 @@ class Solution:
 
         prefer_dict = collections.defaultdict(list)
         for prefer in perference:
-            prefer_dict[prefer.store_id].append(prefer.store_id)
+            prefer_dict[prefer.store_id].append(prefer.dasher_id)
 
         for order in orders:
             if self.canSeenStorePrefer(order,cur_dasher,current,prefer_dict):
@@ -132,7 +142,7 @@ class Solution:
             elif current.hour >= 18:
                 return cur_dasher.rank == "HIGH"
             elif current.hour >= 17:
-                if cur_dasher.id in prefer_dict[order.order]:
+                if cur_dasher.id in prefer_dict[order.store]:
                     return True
         else:
             return False
@@ -193,7 +203,7 @@ class Solution:
                 return current_dasher.deliver_way == item.deliver_prefer or item.deliver_prefer == "BOTH"
             if item_pick_days - current_days == 1:
                 if current_hours >= 19:
-                    if current_dasher == "car":
+                    if current_dasher.deliver_way == "car":
                         if item.deliver_prefer =="both":
                             return True
                         else:

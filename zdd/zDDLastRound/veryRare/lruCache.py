@@ -1,6 +1,6 @@
 '''
 很少见 就一个intern出了
-
+几乎不会
 '''
 
 class Node:

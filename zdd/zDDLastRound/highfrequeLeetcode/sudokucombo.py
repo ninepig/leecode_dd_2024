@@ -1,3 +1,7 @@
+from collections import defaultdict
+from typing import List
+
+
 class solution:
 
     def isvalid(self, row, col, c, grid):
@@ -6,6 +10,7 @@ class solution:
                 return False
             if grid[i][col] == c:
                 return False
+            ##对应的9宫格
             if grid[(3 * (row // 3) + i // 3)][3 * (col // 3) + i % 3] == c:
                 return False
         return True
@@ -19,6 +24,7 @@ class solution:
                 if grid[i][j] == ".":
                     for c in range(1, len(grid) + 1):
                         c = str(c)
+                        ##如果横竖一圈都是valid，再dfs下一个数字。找到一个可以解决的方案
                         if self.isvalid(i, j, c, grid):
                             grid[i][j] = c
                             if self.solve(grid) == True:
@@ -31,6 +37,25 @@ class solution:
 核心是这个box index的算法'''
 
 
+def isValidSudoku(self, board: List[List[str]]) -> bool:
+    row_bag = defaultdict(set)
+    col_bag = defaultdict(set)
+    sec_bag = defaultdict(set)
+
+    for i in range(9):
+        for j in range(9):
+            num = board[i][j]
+            if not num.isdigit():
+                continue
+            sec = (i // 3, j // 3)
+            if num in row_bag[i] or num in col_bag[j] or num in sec_bag[sec]:
+                return False
+            else:
+                row_bag[i].add(num)
+                col_bag[j].add(num)
+                sec_bag[sec].add(num)
+
+    return True
 def isValidSudoku(self, board: list[list[str]]) -> bool:
     row_maps = [dict() for _ in range(9)]
     col_maps = [dict() for _ in range(9)]

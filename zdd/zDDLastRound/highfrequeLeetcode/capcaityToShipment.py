@@ -1,3 +1,4 @@
+## https://algo.itcharge.cn/01.Array/03.Array-Binary-Search/02.Array-Binary-Search-02/#_4-2-%E6%8E%92%E9%99%A4%E6%B3%95
 class Solution:
     def shipWithinDays(self, weights: list[int], days: int) -> int:
         ## santity check

@@ -49,6 +49,7 @@ e(5)   d(4)   f(6)       g(7)
 There are a total of 5 changed nodes. Node f is a newly-added node. c(3) and old g(7) are deactivated and h(8) and g(7) are newly added nodes
 
 followup print out the changes
+炒
 '''
 
 class Node:

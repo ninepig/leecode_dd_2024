@@ -41,7 +41,7 @@ class solution:
         income = 0
         for idx in range(1,len(orders)):
             current_order = orders[idx]
-            min_differece = self.getMin(current_order,top_order)
+            min_differece = self.getMin(top_order,current_order)
             current_income = min_differece * order_in_hands * basePay ## order in hands means how many picked order, 2 picking order diff has base pay
             income += current_income
             if current_order.status == "P":
@@ -58,7 +58,7 @@ class solution:
 
 
 
-    def dasherIncomeWithWaiting(self, orders: list[OrderActivity], basePay: float,peakHour:list[list[int]]):
+    def dasherIncomeWithWaiting(self, orders: list[OrderActivity], basePay: float):
         if not orders or len(orders) == 0 or not basePay:
             raise Exception("Wrong input")
         totalIncome = 0
@@ -76,12 +76,12 @@ class solution:
             elif current_item.status == "picked":
                 if not top_waitingOrder:
                     raise Exception("Wrong order")
-                min_difference = self.getMin(top_waitingOrder, current_item,peakHour)
+                min_difference = self.getMin(top_waitingOrder, current_item)
                 totalIncome += min_difference * basePay  ## waiting pay
                 top_waitingOrder = None  ## no pending wait order
             elif current_item.status == "accepted":
-                min_difference = self.getMin(top_order, current_item,peakHour)
-                totalIncome += min_difference * orderInHand * basePay
+                min_differece = self.getMin(top_order, current_item)
+                totalIncome += min_differece * orderInHand * basePay
                 orderInHand += 1
                 top_order = current_item
             elif current_item.status == "delivered":
@@ -139,19 +139,55 @@ class solution:
         base_min = end_by_mins - start_by_mins
         ## get peak time
         peak_min = 0
+
+        ## how many peak hour we have and what is format . TODO need confirm with interviewer
         for item in peakHour:
-            ## 取决于给我们的peakhour的input ---> hour:min ... 最基本的
-            peak_start_min = item[0].hour * 60 + item[1].min  ## transs or other way to make hour:min
-            peak_end_min = item[1].hour * 60 + item[1].min  ##
-            if peak_start_min < start_by_mins:
-                if peak_end_min > end_by_mins:
-                    peak_min += end_by_mins - start_by_mins
-                else:
-                    peak_min += peak_end_min - peak_start_min
-            else:
-                if peak_end_min > end_by_mins:
-                    peak_min += (end_by_mins - peak_start_min)
-                else:
-                    peak_min += (peak_end_min - peak_start_min)
+            peak_start_min = item[0] * 60 + item[1]
+            peak_end_min = item[2]*60 + item[3]
+            ## check if our current start - end time interval has overlap with peak hour
+            ## 一定要画图做
+            if peak_end_min < start_by_mins:
+                peak_min+=0
+            elif peak_start_min > end_by_mins:
+                peak_min += 0
+            elif peak_start_min < start_by_mins and peak_end_min < end_by_mins:
+                peak_min += peak_end_min - start_by_mins
+            elif peak_start_min > start_by_mins and peak_end_min < end_by_mins:
+                peak_min += peak_end_min + peak_start_min
+            elif peak_start_min < end_by_mins and peak_end_min > end_by_mins:
+                peak_min += end_by_mins - peak_end_min
+
+        return peak_min + base_min
+
+
+
 
         return base_min + peak_min
+
+## for pick full 2 type only
+
+test = OrderActivity(6,15,"P",1,1)
+test2 = OrderActivity(6,30,"P",2,1)
+test3 = OrderActivity(6,35,"F",1,1)
+test4 = OrderActivity(6,40,"F",2,1)
+
+testArray = [test,test2,test3,test4]
+sol = solution()
+print(sol.dasherIncome(testArray,0.3))
+# print(sol.dasherIncomeConstantSpace(testArray,0.3))
+
+
+test = OrderActivity(6,15,"accepted",1,1)
+test2 = OrderActivity(6,30,"accepted",2,1)
+test3 = OrderActivity(6,35,"arrived",1,1)
+test4 = OrderActivity(6,40,"picked",1,1)
+test5 = OrderActivity(6,45,"arrived",2,1)
+test6 = OrderActivity(6,48,"picked",2,1)
+test7 = OrderActivity(6,50,"delivered",1,1)
+test8 = OrderActivity(6,55,"delivered",2,1)
+testArray2 = [test,test2,test3,test4,test5,test6,test7,test8]
+# testArray3 = [test,test2,test7,test8]
+print(sol.dasherIncomeWithWaiting(testArray2,0.3))
+
+
+## peak hour 没有测试 但是大概就这个意思 取决于input的格式

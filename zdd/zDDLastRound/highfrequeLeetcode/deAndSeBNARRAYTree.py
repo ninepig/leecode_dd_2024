@@ -46,7 +46,6 @@ class SolutionNTree:
             for child in node.children:
                 self.build_String(child,array)
 
-
     def de(self,datas:str):
         if len(datas) == 0:
             return None

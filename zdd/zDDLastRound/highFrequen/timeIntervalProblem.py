@@ -36,8 +36,6 @@ class solution:
             output_days = str(1 if start_day == 8 else start_day % 8)
             output_hour = ("0" + str(start_hour)) if start_hour < 10 else str(start_hour)
             output_min = ("0" + str(start_mins)) if start_mins < 10 else str(start_mins)
-            # cur_time_string = (str(1 if start_day == 8 else start_day % 8) + str(("0" + str(start_hour)) if start_hour < 10 else str(start_hour))
-            #                    + str(("0" + str(start_mins)) if start_mins < 10 else str(start_mins)))
             print(output_days + output_hour + output_min)
             res.append(output_days + output_hour + output_min)
             start_mins += interval
@@ -47,7 +45,9 @@ class solution:
             if start_hour > 24:
                 start_day +=1
                 start_hour = start_hour%24
-            if (start_day > end_day) or (start_day == end_day and start_hour > end_hour) or (start_day == end_day and start_hour == end_hour and start_mins > end_mins):
+                ##换行加括号
+            if ((start_day > end_day) or (start_day == end_day and start_hour > end_hour)
+                    or (start_day == end_day and start_hour == end_hour and start_mins > end_mins)):
                 break
 
         return res
@@ -66,7 +66,7 @@ class solution:
         except:
             print("input parsing error")
 
-start = "tue 10:45 am"
+start = "sun 10:45 am"
 end = "mon 11:00 pm "
 sol = solution()
 sol.getTimeInterval(start,end,5)

@@ -36,8 +36,13 @@ when missing number bigger than n, we get all number from [1,n]
 
 
 class Solution:
+    '''
+    1 array sorted
+    2 try to get missing number range
+    3 if we want do a patch, max number we can reach is [missing, 2*missing - 1]
+    '''
   def minPatches(self, nums: list[int], n: int) -> int:
-    miss, i, patches = 1, 0, 0
+    miss, i, patches = 1, 0, 0 ## miss means number we can reach, i is the idx
     while miss <= n:
         if i < len(nums) and nums[i] <= miss: ## if we can not find missing , then we need add that
             miss += nums[i] ## we can get every number from s+n[i] --> so missing += n[i]

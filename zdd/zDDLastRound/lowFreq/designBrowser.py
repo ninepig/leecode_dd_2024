@@ -14,6 +14,7 @@ string forward(int steps) Move steps forward in history. If you can only forward
 '''
 
 class BrowserHistoryStack:
+  ## 栈操作
   def __init__(self, homepage: str):
     self.history = []
     self.visit(homepage)

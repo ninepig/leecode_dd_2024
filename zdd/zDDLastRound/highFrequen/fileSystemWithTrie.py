@@ -1,5 +1,8 @@
 # https://leetcode.com/discuss/interview-question/1794761/doordash-phone-screen
 class TrieTree:
+    ## create
+    #o(wl) word count/ l word average length
+    ## other --> o(l)
     def __init__(self):
         self.value = None ## value use to store file content
         self.children = dict() ## using dict to present key
@@ -60,6 +63,7 @@ class TrieTree:
         for path in paths[1:]:
             if path not in cur_node.children:
                 raise Exception("file not exists")
+            ## 这里很重要 parent必须先出现 TODO
             parent = cur_node
             cur_node = cur_node.children[path]
             last_path = path
@@ -101,8 +105,8 @@ print(sol.getFile("/wenjing"))
 sol.deleteFile("/wenjing/wenjing")
 print(sol.getFile("/wenjing/wenjing"))
 
-##------------------------------------------
-##onwatch
+#------------------------------------------
+#onwatch
 
 class TrieTreeOnWatch:
     def __init__(self):
@@ -199,7 +203,7 @@ class TrieTreeOnWatch:
             if item not in cur_node.children:  ## if not in cur_node's children dict
                 raise Exception("path has not exists , can not on watch")
             cur_node = cur_node.children[item]
-        cur_node.onWatch = True ## ADDING WATCH flag on current node 
+        cur_node.onWatch = True ## ADDING WATCH flag on current node
         return True
 
     def callback(self, param, file_path, param1, value):

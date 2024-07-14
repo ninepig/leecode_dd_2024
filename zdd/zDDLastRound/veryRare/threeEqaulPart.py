@@ -1,5 +1,6 @@
 '''
-You are given an array arr which consists of only zeros and ones, divide the array into three non-empty parts such that all of these parts represent the same binary value.
+You are given an array arr which consists of only zeros and ones,
+ divide the array into three non-empty parts such that all of these parts represent the same binary value.
 
 If it is possible, return any [i, j] with i + 1 < j, such that:
 
@@ -9,7 +10,8 @@ arr[j], arr[j + 1], ..., arr[arr.length - 1] is the third part.
 All three parts have equal binary values.
 If it is not possible, return [-1, -1].
 
-Note that the entire part is used when considering what binary value it represents. For example, [1,1,0] represents 6 in decimal, not 3. Also, leading zeros are allowed, so [0,1,1] and [1,1] represent the same value.
+Note that the entire part is used when considering what binary value it represents.
+For example, [1,1,0] represents 6 in decimal, not 3. Also, leading zeros are allowed, so [0,1,1] and [1,1] represent the same value.
 '''
 class Solution:
     def threeEqualParts(self, arr: List[int]) -> List[int]:
@@ -21,6 +23,7 @@ class Solution:
             return [0, 2]
 
         # find the start index of each group of ones
+        ## 因为 1出现的个数肯定是3的倍数， 所以 3个 1开始的起点是我们要找的目标
         c = 0
         starts = []
         for i, d in enumerate(arr):

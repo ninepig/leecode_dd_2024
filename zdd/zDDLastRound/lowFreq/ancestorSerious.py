@@ -39,7 +39,6 @@ class solution:
     def lowestCommonAncestorNarray(self,root:Node,p:Node,q:Node):
         if p == root or q == root:
             return root ## we found one node equal to target
-
         count = 0
         temp = None
         for child in root.children:
@@ -51,7 +50,6 @@ class solution:
             return root # means in this level's root, we have two target found
 
         return temp # if we did not found both, return found node
-
 
 
 ## could not exit version.

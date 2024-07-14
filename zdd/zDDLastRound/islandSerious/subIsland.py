@@ -1,5 +1,10 @@
 '''
 
+1. 给两个m * n的矩阵，每个点的值非0即1，第一个矩阵中1的位置表示有restaurant，第二个矩阵中1的位置表示有dasher，问有多少组restaurant的集群能被dasher能覆盖？
+
+https://www.1point3acres.com/bbs/thread-912260-1-1.html
+
+
 题目的场景套了一个送快递的外衣，但是本质是
 给两个相同size的2D array，只含有0和1，所有相邻（4-ways）的1组成一块地方称之为area。举个例子
 a= [[1,1,1,0,0,0],
@@ -114,12 +119,8 @@ class Solution:
                 if grid2[i][j] == 1:
                     ## using a deep copy to get a new grid so it won't affect next round
                     grid_parent_temp = copy.deepcopy(grid)
-                    # print(grid)
-                    # print(grid2)
                     size_parent = dfsGetSize(i,j,grid_parent_temp)
-                    # print("parent" + str(size_parent))
                     size_current = dfsGetSize(i,j,grid2)
-                    # print("current" + str(size_current))
                     # FollowUp: Count Sub Islands that are 40% a subset of the other grid
                     ## if we use this way, parent could already be moved, so we should do a
                     if size_current / size_parent * 100 >= 40.0:

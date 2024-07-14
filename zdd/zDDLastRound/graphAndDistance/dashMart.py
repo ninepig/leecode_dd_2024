@@ -11,6 +11,7 @@ class solution:
     因为对于每个源头，每次都是1个step
     我们利用把step放在queue之中，所以不需要层序的做法
     '''
+    ## time o (m*n) visiting all
     def getClosedMart(self,locations:list[list[int]],grid:list[list[str]]) -> list[int]:
         queue = collections.deque()
         dirs = [(-1,0),(1,0),(0,1),(0,-1)]
@@ -43,6 +44,7 @@ class solution:
 
 
     '''
+    c*m*n
     follow up是单源的做法 每次都从一个c 出发
     '''
     def getMartWithMostCustomer(self,locations:list[list[int]],grid:list[list[str]]) -> list[int]:

@@ -63,7 +63,9 @@ class solution:
 
         items = website_tuble_count.items()
         print(items)
+        ## dict_items([(('home', 'about', 'career'), 2), (('home', 'cart', 'maps'), 1), (('home', 'cart', 'home'), 1), (('home', 'maps', 'home'), 1), (('cart', 'maps', 'home'), 1)])
         ## we sorted {():x} dict by value desending first , then asdeng
+        ## [0] means first item, [0][0] means tumble ---> ('home', 'about', 'career')
         return sorted(items,key=lambda x:(-x[1],x[0]))[0][0]
         # return items
 

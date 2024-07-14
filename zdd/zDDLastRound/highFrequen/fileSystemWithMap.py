@@ -25,6 +25,7 @@ class SolutionMap:
     def deletePath(self,paths):
         contain = False
         delete_key = []
+
         ## TODO 这个逻辑有问题。。需要问清楚， 除非是start with。要不然不该删除， 而不是in
         for key in self.path_file_dict.keys():
             # if paths in key: ## 这个有问题

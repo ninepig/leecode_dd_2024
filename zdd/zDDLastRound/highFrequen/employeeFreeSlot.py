@@ -15,6 +15,7 @@ def availableTime(self, schedule: list[list[int]], start: int, end: int, duratio
     1 sort
     2 filter
     3 find first slot
+    nlogn
     '''
     if not schedule:
         return []

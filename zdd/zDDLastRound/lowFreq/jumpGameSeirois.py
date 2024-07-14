@@ -19,7 +19,10 @@ class Solution:
     '''
     We start travering the array from start
     While traversing, we keep a track on maximum reachable index and update it accordingly.
-    If we reach the previous reachable index, this implies we have reached this index with current jumps and now we can reach the next maximum possible index by current jumps+1 jumps and update the previous reachable index to maximum reachable index. Now, if updated previous reachable index is greater than equal to last index, just return the jump count.
+    If we reach the previous reachable index, this implies we have reached this
+     index with current jumps and now we can reach the next maximum possible index by current jumps+1
+      jumps and update the previous reachable index to maximum reachable index.
+       Now, if updated previous reachable index is greater than equal to last index, just return the jump count.
     class Solution:
     贪心
 '''
@@ -46,9 +49,11 @@ class Solution:
     '''
     You are given a 0-indexed integer array nums and an integer k.
 
-    You are initially standing at index 0. In one move, you can jump at most k steps forward without going outside the boundaries of the array. That is, you can jump from index i to any index in the range [i + 1, min(n - 1, i + k)] inclusive.
+    You are initially standing at index 0. In one move, 
+    you can jump at most k steps forward without going outside the boundaries of the array. That is, you can jump from index i to any index in the range [i + 1, min(n - 1, i + k)] inclusive.
     
-    You want to reach the last index of the array (index n - 1). Your score is the sum of all nums[j] for each index j you visited in the array.
+    You want to reach the last index of the array (index n - 1). 
+    Your score is the sum of all nums[j] for each index j you visited in the array.
     
     Return the maximum score you can get.
     关键是这个值可以是负的 所以要找范围最大值
@@ -69,6 +74,7 @@ class Solution:
             return dp(len(nums) - 1)
 
         ## we need find a way to improve, using a deque to do a sliding windows max way
+        ## monotonic decreasing stack
         def maxResultQueue(self, nums: list[int], k: int) -> int:
             n = len(nums)
             deq = deque()

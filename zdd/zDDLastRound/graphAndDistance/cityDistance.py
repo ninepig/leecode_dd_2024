@@ -21,6 +21,8 @@ output
 2 if query city does not have any same x or y value with othercity, mean can not reachable --> 'None'
 3 if query city does have any same x or y , we choose the same distance
 4 if same distance, order by city name --> lexi order
+
+https://algo.itcharge.cn/01.Array/03.Array-Binary-Search/02.Array-Binary-Search-02/#_4-2-%E6%8E%92%E9%99%A4%E6%B3%95
 '''
 import collections
 import math
@@ -36,6 +38,8 @@ class solution:
     ## form city name : city dict
     ## form x : list[city] dict
     ## form y : list[city] dict
+
+    # time--> m * n*n  m --> query size n means city list
     def findNearCity(self,cities,list_x,list_y,queries):
         # santity check
         if not cities or not list_x or not list_y or not queries:
@@ -100,7 +104,7 @@ class solution:
                 final_city_name = candidate.name if candidate.name < final_city_name else final_city_name
         return final_city_name
 
-
+    ## m * nlogn / n *n *logn -->
     def findNearCityBSway(self,cities,list_x,list_y,queries):
         # santity check
         if not cities or not list_x or not list_y or not queries:
@@ -157,12 +161,12 @@ class solution:
 
     def binarySearchX(self,city_list,target_city):
         left = 0
-        right = len(city_list)
+        right = len(city_list) - 1
         target = 0
         lower = None
         higher = None
         while left < right:
-            mid = left + (right - left) // 2
+            mid = left + (right - left + 1) // 2
             if city_list[mid].name == target_city.name:
                 target = mid ## 利用一个target 来保存目标位
                 break
@@ -185,12 +189,12 @@ class solution:
 
     def binarySearchY(self,city_list,target_city):
         left = 0
-        right = len(city_list)
+        right = len(city_list) - 1
         target = 0
         lower = None
         higher = None
         while left < right:
-            mid = left + (right - left) // 2
+            mid = left + (right - left + 1) // 2
             if city_list[mid].name == target_city.name:
                 target = mid ## 利用一个target 来保存目标位
                 break

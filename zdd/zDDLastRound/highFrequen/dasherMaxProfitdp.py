@@ -38,7 +38,6 @@ class Solution:
         return dp[-1]
 
     # binary search version
-
     def jobMaxProfitBS(self,start_days:list[int],end_days:list[int],pay_days:list[int],start_limit:int,end_limit:int):
         ## santity check
         if not start_days or not end_days or not pay_days or len(start_days) == 0 or len(end_days) == 0 or len(pay_days) == 0:
@@ -132,8 +131,6 @@ class Solution:
                 dp_item[i].append(i)
 
         return dp[-1], dp_item[-1]
-
-
 
 
 start_time = 0

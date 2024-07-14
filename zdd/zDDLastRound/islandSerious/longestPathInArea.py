@@ -1,7 +1,7 @@
 '''
 Given an integer matrix, find the length of the longest path that have same values. The matrix has no boundary limits.
 (like, Google Maps - see edit for context)
-
+https://leetcode.com/discuss/interview-question/392780/Doordash-or-Phone-Screen-or-Longest-path-duplicate-numbers-within-a-Matrix&#8205;&#8204;&#8205;&#8204;&#8205;&#8205;&#8205;&#8205;&#8204;&#8204;&#8204;&#8205;&#8204;&#8205;&#8204;&#8205;&#8204;&#8205;
 From each cell, you can either move to two directions: horizontal or vertical. You may NOT move diagonally or move outside of the boundary.
 
 nums = [
